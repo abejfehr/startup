@@ -1,18 +1,18 @@
-class Game {
+class StartupGame {
 
     constructor () {
+        // The amount of points the player currently has
         this.points = 0;
 
-        document.body.addEventListener('click', () => {
-            ++this.points;
-            this.writePoints();
-        });
+        // Add the onClick handler to the whole body
+        document.body.addEventListener('click', this.addPoints.bind(this, 1));
     }
 
-    writePoints () {
+    addPoints (howMany) {
+        this.points += howMany;
         document.getElementById('points').innerText = this.points;
     }
 
 }
 
-var game = new Game();
+var game = new StartupGame();
