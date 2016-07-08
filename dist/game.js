@@ -1,5 +1,11 @@
-class StartupGame {
+/**
+ * Purpose: The main game loop
+ * Source:  main.js
+ */
 
+ /* jshint esversion: 6 */
+
+class StartupGame {
     constructor () {
         // The amount of points the player currently has
         this.saveData = {
@@ -40,7 +46,6 @@ class StartupGame {
             }, 0);
         });
     }
-
 }
 
 var game = new StartupGame();
