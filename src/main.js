@@ -83,7 +83,6 @@ class StartupGame {
         var progress = (timestamp - this.lastTimestamp) / 1000 / 60;
         this.lastTimestamp = timestamp;
 
-        debugger;
         // Figure out how many points to add
         this.saveData.queuedPoints += this.pointsPerMinute * progress;
 
