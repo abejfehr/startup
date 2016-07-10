@@ -1,4 +1,16 @@
 /**
+ *
+ */
+class Worker {
+
+    constructor (pointsPerMinute) {
+        this.pointsPerMinute = pointsPerMinute;
+    }
+
+}
+
+
+/**
  * Purpose: The main game loop
  * Source:  main.js
  */
@@ -13,7 +25,8 @@ class StartupGame {
          */
         this.saveData = {
             points: 0,
-            queuedPoints: 0
+            queuedPoints: 0,
+            workers: []
         }
 
         /**
@@ -27,7 +40,7 @@ class StartupGame {
          * arbitrary, it should really be calculated dynamically each step from
          * powerups or whatever the user has
          */
-        this.pointsPerMinute = 6;
+        this.pointsPerMinute = 0;
 
         /**
          * The number of points to add per click. 1 is arbitrary, but it's a
@@ -40,9 +53,20 @@ class StartupGame {
             this.saveData.queuedPoints += this.pointsPerClick;
         });
 
+        // Add the click event listener to the worker 1 button
+        document.getElementById('worker1').addEventListener('click', (e) => {
+            e.stopPropagation();
+            this.saveData.workers.push(new Worker(30));
+        });
+
         // Loads the data and kicks off the timer as soon as the data is loaded.
         this.load().then((loadedData) => {
             this.saveData = loadedData;
+            /**
+             * TODO: Workers aren't persistent yet, we need some way of storing
+             * them that aren't instances of the objects themselves.
+             */
+            this.saveData.workers = [];
             window.requestAnimationFrame(this.step.bind(this));
         });
 
@@ -75,6 +99,16 @@ class StartupGame {
         document.getElementById('points').innerText = this.saveData.points;
     }
 
+    getPointsPerMinute () {
+        var n = 0;
+        if (this.saveData.workers.map) {
+            this.saveData.workers.map((worker) => {
+                n += worker.pointsPerMinute;
+            });
+        }
+        return n;
+    }
+
     /**
      * The game loop that handles adding points. Takes a DOMHighResTimeStamp.
      */
@@ -84,7 +118,7 @@ class StartupGame {
         this.lastTimestamp = timestamp;
 
         // Figure out how many points to add
-        this.saveData.queuedPoints += this.pointsPerMinute * progress;
+        this.saveData.queuedPoints += this.getPointsPerMinute() * progress;
 
         // Add the floor of the number of points to add
         this.saveData.points += ~~this.saveData.queuedPoints;
