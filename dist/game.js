@@ -3,28 +3,49 @@
  * Source:  main.js
  */
 
- /* jshint esversion: 6 */
+/* jshint esversion: 6 */
 
 class StartupGame {
     constructor () {
-        // The amount of points the player currently has
+
+        /**
+         * The various data about the game that can be immediately saved/loaded
+         */
         this.saveData = {
-            points: 0
+            points: 0,
+            queuedPoints: 0
         }
 
-        // Add the onClick handler to the whole body
-        document.body.addEventListener('click', this.addPoints.bind(this, 1));
+        /**
+         * The timestamp since the last animation frame step. This is only used
+         * by the step function.
+         */
+        this.lastTimestamp = 0;
 
+        /**
+         * The number of points to add every minute of the game. 6 is totally
+         * arbitrary, it should really be calculated dynamically each step from
+         * powerups or whatever the user has
+         */
+        this.pointsPerMinute = 6;
+
+        /**
+         * The number of points to add per click. 1 is arbitrary, but it's a
+         * good starting value.
+         */
+        this.pointsPerClick = 1;
+
+        // Add the click handler to the whole body
+        document.body.addEventListener('click', () => {
+            this.saveData.queuedPoints += this.pointsPerClick;
+        });
+
+        // Loads the data and kicks off the timer as soon as the data is loaded.
         this.load().then((loadedData) => {
             this.saveData = loadedData;
-            document.getElementById('points').innerText = this.saveData.points;
+            window.requestAnimationFrame(this.step.bind(this));
         });
-    }
 
-    addPoints (howMany) {
-        this.saveData.points += howMany;
-        document.getElementById('points').innerText = this.saveData.points;
-        this.save();
     }
 
     /**
@@ -37,7 +58,7 @@ class StartupGame {
     }
 
     /**
-     * Loads the game's data asynchronously from LocalStorage
+     * Loads the game's data asynchronously from LocalStorage.
      */
     load () {
         return new Promise((resolve) => {
@@ -46,6 +67,42 @@ class StartupGame {
             }, 0);
         });
     }
+
+    /**
+     * Updates the points on the screen.
+     */
+    updatePoints () {
+        document.getElementById('points').innerText = this.saveData.points;
+    }
+
+    /**
+     * The game loop that handles adding points. Takes a DOMHighResTimeStamp.
+     */
+    step (timestamp) {
+        // Get the time difference in milleseconds since the last timestamp
+        var progress = (timestamp - this.lastTimestamp) / 1000 / 60;
+        this.lastTimestamp = timestamp;
+
+        debugger;
+        // Figure out how many points to add
+        this.saveData.queuedPoints += this.pointsPerMinute * progress;
+
+        // Add the floor of the number of points to add
+        this.saveData.points += ~~this.saveData.queuedPoints;
+        this.saveData.queuedPoints %= 1;
+
+        // Saves the game, probably way too often
+        this.save();
+
+        // Writes the number of points to the screen
+        this.updatePoints();
+
+        // Recursively do this again
+        window.requestAnimationFrame(this.step.bind(this));
+    }
 }
 
+/**
+ * Let's get this party started!
+ */
 var game = new StartupGame();
