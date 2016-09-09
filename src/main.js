@@ -48,12 +48,6 @@ class StartupGame {
         document.body.addEventListener('click', () => {
             this.saveData.queuedPoints += this.pointsPerClick;
         });
-
-        // Add the click event listener to the worker 1 button
-        document.getElementById('worker1').addEventListener('click', (e) => {
-            e.stopPropagation();
-            this.saveData.workers.push(new Worker(30));
-        });
     }
 
     /**
