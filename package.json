@@ -22,5 +22,7 @@
     "gulp-jshint": "^2.0.1",
     "jshint": "^2.9.2"
   },
-  "dependencies": {}
+  "dependencies": {
+    "gulp-contrib-copy": "^0.1.2"
+  }
 }
