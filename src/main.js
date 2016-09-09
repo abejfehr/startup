@@ -1,18 +1,9 @@
- /* jshint esversion: 6 */
-
- /**
- *
- */
-class Worker {
-    constructor (pointsPerMinute) {
-        this.pointsPerMinute = pointsPerMinute;
-    }
-}
-
 /**
  * Purpose: The main game loop
  * Source:  main.js
  */
+
+ /* jshint esversion: 6 */
 
 class StartupGame {
     constructor () {
@@ -20,7 +11,7 @@ class StartupGame {
          * The various data about the game that can be immediately saved/loaded
          */
         this.saveData = {
-            points: 0,
+            points: 1,
             queuedPoints: 0,
             workers: []
         };
@@ -80,6 +71,7 @@ class StartupGame {
       this.load()
       .then((loadedData) => {
           this.saveData = loadedData;
+          this.saveData.points += 1;
           /**
            * TODO: Workers aren't persistent yet, we need some way of storing
            * them that aren't instances of the objects themselves.
