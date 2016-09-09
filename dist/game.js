@@ -10,18 +10,6 @@ class Worker {
 }
 
 /**
- *
- */
-class Worker {
-
-    constructor (pointsPerMinute) {
-        this.pointsPerMinute = pointsPerMinute;
-    }
-
-}
-
-
-/**
  * Purpose: The main game loop
  * Source:  main.js
  */
