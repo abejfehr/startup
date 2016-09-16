@@ -48,6 +48,9 @@ class StartupGame {
     document.body.addEventListener('click', function () {
         this.queuedViews += this.viewsPerClick;
     }.bind(this));
+
+    // Update the title to untitled
+    document.title = "untitled";
   }
 
   /**
@@ -84,7 +87,7 @@ class StartupGame {
     .then(function (loadedData) {
       this.views = loadedData.views;
       this.queuedViews = loadedData.queuedViews;
-      
+
       this.views += 1;
       /**
        * TODO: Workers aren't persistent yet, we need some way of storing
