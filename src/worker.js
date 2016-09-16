@@ -32,8 +32,19 @@ class Team {
 }
 
 class Worker {
+  /**
+   * Represents one worker
+   *
+   * @constructor
+   */
   constructor (n, time) {
+    /**
+     * The name of the worker
+     */
     this.name = n;
-    this.timestamp = time;
+    /**
+     * The tick that this worker was hired on
+     */
+    this.dateHired = time;
   }
 }
