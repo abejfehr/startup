@@ -36,40 +36,40 @@ class StartupGame {
         this.pointsPerClick = 1;
 
         // Add the click handler to the whole body
-        document.body.addEventListener('click', () => {
+        document.body.addEventListener('click', function () {
             this.saveData.queuedPoints += this.pointsPerClick;
-        });
+        }.bind(this));
     }
 
     /**
      * Saves the game's data asynchronously to LocalStorage
      */
     save () {
-        setTimeout(() => {
+        setTimeout(function () {
             // btoa() is used for basic encryption
             localStorage.setItem("saveData", btoa(JSON.stringify(this.saveData)));
-        }, 0);
+        }.bind(this), 0);
     }
 
     /**
      * Loads the game's data asynchronously from LocalStorage.
      */
     load () {
-        return new Promise((resolve, reject) => {
-            setTimeout(() => {
+        return new Promise(function (resolve, reject) {
+            setTimeout(function () {
                 if (localStorage.getItem("saveData") === null) {
                   reject();
                 } else {
                   resolve(JSON.parse(atob(localStorage.getItem("saveData"))));
                 }
-            }, 0);
-        });
+            }.bind(this), 0);
+        }.bind(this));
     }
 
     start () {
       // Loads the data and kicks off the timer as soon as the data is loaded.
       this.load()
-      .then((loadedData) => {
+      .then(function (loadedData) {
           this.saveData = loadedData;
           this.saveData.points += 1;
           /**
@@ -78,10 +78,10 @@ class StartupGame {
            */
           this.saveData.workers = [];
           window.requestAnimationFrame(this.step.bind(this));
-      })
-      .catch(() => {
+      }.bind(this))
+      .catch(function () {
           window.requestAnimationFrame(this.step.bind(this));
-      });
+      }.bind(this));
     }
 
     /**
@@ -94,9 +94,9 @@ class StartupGame {
     getPointsPerMinute () {
         var n = 0;
         if (this.saveData.workers.map) {
-            this.saveData.workers.map((worker) => {
+            this.saveData.workers.map(function (worker) {
                 n += worker.pointsPerMinute;
-            });
+            }.bind(this));
         }
         return n;
     }
