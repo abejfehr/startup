@@ -48,6 +48,9 @@ class StartupGame {
     document.body.addEventListener('click', function () {
         this.gameData.queuedViews += this.viewsPerClick;
     }.bind(this));
+
+    // Update the title to untitled
+    document.title = "untitled";
   }
 
   /**
@@ -57,7 +60,7 @@ class StartupGame {
     setTimeout(function () {
       // btoa() is used for basic encryption
       localStorage.setItem("saveData", btoa(JSON.stringify(this.gameData)));
-    }.bind(this)), 0);
+    }.bind(this), 0);
   }
 
   /**
