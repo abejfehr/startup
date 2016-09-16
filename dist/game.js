@@ -9,26 +9,41 @@ const GRAPHIC_DESIGN = "Graphic Design";
 
 class StartupGame {
   constructor () {
-
+    
     this.teams = {
       GRAPHIC_DESIGN: new Team(GRAPHIC_DESIGN, "They draw.", function(l) { return l*60; });
     };
 
-    // Real amount of views
+    /**
+     * Real number of views
+     */
     this.views = 1;
 
-    // Nominal amount of views
+    /**
+     * Nominal number of views
+     */
     this.queuedViews = 1;
 
+    /**
+     * A list of all of the workers that your company has
+     */
     this.workers = [];
 
+    /**
+     * A list of all of the skills that your company has
+     */
     this.skills = [];
 
     /**
      * The timestamp since the last animation frame step. This is only used
-     * by the step function.
+     * by the step function
      */
     this.lastTimestamp = 0;
+
+    /**
+     * The number of ticks that have passed in the game so far
+     */
+    this.ticks = 0;
 
     /**
      * The number of views to add every minute of the game. 6 is totally
@@ -117,7 +132,7 @@ class StartupGame {
 
   getWorkerViews () {
     for (let i = 0; i < this.teams.length; i++) {
-      
+
     }
   }
 
@@ -128,6 +143,7 @@ class StartupGame {
     // Get the time difference in milleseconds since the last timestamp
     var progress = (timestamp - this.lastTimestamp) / 1000 / 60;
     this.lastTimestamp = timestamp;
+    this.ticks += progress;
 
     // Add more views to queue
     for (let i = 0; i < this.workers.length; i++) {
@@ -189,8 +205,19 @@ class Team {
 }
 
 class Worker {
+  /**
+   * Represents one worker
+   *
+   * @constructor
+   */
   constructor (n, time) {
+    /**
+     * The name of the worker
+     */
     this.name = n;
-    this.timestamp = time;
+    /**
+     * The tick that this worker was hired on
+     */
+    this.dateHired = time;
   }
 }
