@@ -10,12 +10,12 @@ class StartupGame {
     /**
      * The various data about the game that can be immediately saved/loaded
      */
-    this.gameData = {
-      views: 1,
-      queuedViews: 0,
-      workers: [],
-      skills: []
-    };
+    // this.gameData = {
+    //   views: 1,
+    //   queuedViews: 0,
+    //   workers: [],
+    //   skills: []
+    // };
 
     this.views = 1;
 
@@ -46,7 +46,7 @@ class StartupGame {
 
     // Add the click handler to the whole body
     document.body.addEventListener('click', function () {
-        this.gameData.queuedViews += this.viewsPerClick;
+        this.queuedViews += this.viewsPerClick;
     }.bind(this));
   }
 
@@ -56,8 +56,11 @@ class StartupGame {
   save () {
     setTimeout(function () {
       // btoa() is used for basic encryption
-      localStorage.setItem("saveData", btoa(JSON.stringify(this.gameData)));
-    }.bind(this)), 0);
+      localStorage.setItem("saveData", btoa(JSON.stringify({
+        views: this.views,
+        queuedViews: this.queuedViews,
+      })));
+    }.bind(this), 0);
   }
 
   /**
@@ -79,13 +82,15 @@ class StartupGame {
     // Loads the data and kicks off the timer as soon as the data is loaded.
     this.load()
     .then(function (loadedData) {
-      this.gameData = loadedData;
-      this.gameData.views += 1;
+      this.views = loadedData.views;
+      this.queuedViews = loadedData.queuedViews;
+      
+      this.views += 1;
       /**
        * TODO: Workers aren't persistent yet, we need some way of storing
        * them that aren't instances of the objects themselves.
        */
-      this.gameData.workers = [];
+      this.workers = [];
       loadedData.workers.push(new Worker("First worker", "Test worker", 1, function(level) { return level*60; }));
       window.requestAnimationFrame(this.step.bind(this));
     }.bind(this))
@@ -98,7 +103,7 @@ class StartupGame {
    * Updates the views on the screen.
    */
   updateViews () {
-    document.getElementById('views').innerText = this.gameData.views;
+    document.getElementById('views').innerText = this.views;
   }
 
   /**
@@ -110,13 +115,13 @@ class StartupGame {
     this.lastTimestamp = timestamp;
 
     // Add more views to queue
-    for (let i = 0; i < this.gameData.workers.length; i++) {
-      this.gameData.queuedViews = this.gameData.workers[i].getRate() * progress;
+    for (let i = 0; i < this.workers.length; i++) {
+      this.queuedViews += this.workers[i].getRate() * progress;
     }
 
     // Add the floor of the number of views to add
-    this.gameData.views += Math.floor(this.gameData.queuedViews);
-    this.gameData.queuedViews %= 1;
+    this.views += Math.floor(this.queuedViews);
+    this.queuedViews %= 1;
 
     // Saves the game, probably way too often
     this.save();
