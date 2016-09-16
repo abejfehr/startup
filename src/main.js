@@ -11,10 +11,10 @@ class StartupGame {
      * The various data about the game that can be immediately saved/loaded
      */
     this.gameData = {
-        views: 1,
-        queuedViews: 0,
-        workers: [],
-        skills: []
+      views: 1,
+      queuedViews: 0,
+      workers: [],
+      skills: []
     };
 
     this.views = 1;
@@ -45,40 +45,40 @@ class StartupGame {
     this.viewsPerClick = 1;
 
     // Add the click handler to the whole body
-    document.body.addEventListener('click', () => {
+    document.body.addEventListener('click', function () {
         this.gameData.queuedViews += this.viewsPerClick;
-    });
+    }.bind(this));
   }
 
   /**
    * Saves the game's data asynchronously to LocalStorage
    */
   save () {
-    setTimeout(() => {
-        // btoa() is used for basic encryption
-        localStorage.setItem("saveData", btoa(JSON.stringify(this.gameData)));
-    }, 0);
+    setTimeout(function () {
+      // btoa() is used for basic encryption
+      localStorage.setItem("saveData", btoa(JSON.stringify(this.gameData)));
+    }.bind(this)), 0);
   }
 
   /**
    * Loads the game's data asynchronously from LocalStorage.
    */
   load () {
-    return new Promise((resolve, reject) => {
-        setTimeout(() => {
-            if (localStorage.getItem("saveData") === null) {
-              reject();
-            } else {
-              resolve(JSON.parse(atob(localStorage.getItem("saveData"))));
-            }
-        }, 0);
-    });
+    return new Promise(function (resolve, reject) {
+      setTimeout(function () {
+        if (localStorage.getItem("saveData") === null) {
+          reject();
+        } else {
+          resolve(JSON.parse(atob(localStorage.getItem("saveData"))));
+        }
+      }.bind(this), 0);
+    }.bind(this));
   }
 
   start () {
     // Loads the data and kicks off the timer as soon as the data is loaded.
     this.load()
-    .then((loadedData) => {
+    .then(function (loadedData) {
       this.gameData = loadedData;
       this.gameData.views += 1;
       /**
@@ -88,10 +88,10 @@ class StartupGame {
       this.gameData.workers = [];
       loadedData.workers.push(new Worker("First worker", "Test worker", 1, function(level) { return level*60; }));
       window.requestAnimationFrame(this.step.bind(this));
-    })
-    .catch(() => {
+    }.bind(this))
+    .catch(function () {
       window.requestAnimationFrame(this.step.bind(this));
-    });
+    }.bind(this));
   }
 
   /**
