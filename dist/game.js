@@ -6,22 +6,37 @@
  /* jshint esversion: 6 */
 
 class StartupGame {
-  constructor () {    
-    // Real amount of views
-    this.views = 1;
+  constructor () {
+    /**
+     * Real number of views
+     */
+    this.views = 0;
 
-    // Nominal amount of views
+    /**
+     * Nominal number of views
+     */
     this.queuedViews = 1;
 
+    /**
+     * A list of all of the workers that your company has
+     */
     this.workers = [];
 
+    /**
+     * A list of all of the skills that your company has
+     */
     this.skills = [];
 
     /**
      * The timestamp since the last animation frame step. This is only used
-     * by the step function.
+     * by the step function
      */
     this.lastTimestamp = 0;
+
+    /**
+     * The number of ticks that have passed in the game so far
+     */
+    this.ticks = 0;
 
     /**
      * The number of views to add every minute of the game. 6 is totally
@@ -35,11 +50,6 @@ class StartupGame {
      * good starting value.
      */
     this.viewsPerClick = 1;
-
-    // Add the click handler to the whole body
-    document.body.addEventListener('click', function () {
-        this.queuedViews += this.viewsPerClick;
-    }.bind(this));
 
     // Update the title to untitled
     document.title = "untitled";
@@ -98,7 +108,7 @@ class StartupGame {
    * Updates the views on the screen.
    */
   updateViews () {
-    document.getElementById('views').innerText = this.views;
+    document.getElementById('views').innerText = "This page has been viewed " + this.views + " time" + (this.views != 1 ? "s." : ".");
   }
 
   /**
@@ -108,9 +118,10 @@ class StartupGame {
     // Get the time difference in milleseconds since the last timestamp
     var progress = (timestamp - this.lastTimestamp) / 1000 / 60;
     this.lastTimestamp = timestamp;
+    this.ticks += progress;
 
     // Add more views to queue
-    for (let i = 0; i < this.workers.length; i++) {
+    for (var i = 0; i < this.workers.length; i++) {
       this.queuedViews += this.workers[i].getRate() * progress;
     }
 
@@ -163,14 +174,25 @@ class Team {
     this.workers = (workers) ? workers : [];
   }
 
-  getRate (l) {
-    return (!l) ? this.rate(this.level) : this.rate(l);
+  getRate (level) {
+    return (!level) ? this.rate(this.level) : this.rate(level);
   }
 }
 
 class Worker {
+  /**
+   * Represents one worker
+   *
+   * @constructor
+   */
   constructor (n, time) {
+    /**
+     * The name of the worker
+     */
     this.name = n;
-    this.timestamp = time;
+    /**
+     * The tick that this worker was hired on
+     */
+    this.dateHired = time;
   }
 }

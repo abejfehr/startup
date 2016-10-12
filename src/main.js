@@ -10,7 +10,7 @@ class StartupGame {
     /**
      * Real number of views
      */
-    this.views = 1;
+    this.views = 0;
 
     /**
      * Nominal number of views
@@ -50,11 +50,6 @@ class StartupGame {
      * good starting value.
      */
     this.viewsPerClick = 1;
-
-    // Add the click handler to the whole body
-    document.body.addEventListener('click', function () {
-        this.queuedViews += this.viewsPerClick;
-    }.bind(this));
 
     // Update the title to untitled
     document.title = "untitled";
@@ -113,7 +108,7 @@ class StartupGame {
    * Updates the views on the screen.
    */
   updateViews () {
-    document.getElementById('views').innerText = this.views;
+    document.getElementById('views').innerText = "This page has been viewed " + this.views + " time" + (this.views != 1 ? "s." : ".");
   }
 
   /**
@@ -126,7 +121,7 @@ class StartupGame {
     this.ticks += progress;
 
     // Add more views to queue
-    for (let i = 0; i < this.workers.length; i++) {
+    for (var i = 0; i < this.workers.length; i++) {
       this.queuedViews += this.workers[i].getRate() * progress;
     }
 

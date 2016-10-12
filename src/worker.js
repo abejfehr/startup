@@ -26,8 +26,8 @@ class Team {
     this.workers = (workers) ? workers : [];
   }
 
-  getRate (l) {
-    return (!l) ? this.rate(this.level) : this.rate(l);
+  getRate (level) {
+    return (!level) ? this.rate(this.level) : this.rate(level);
   }
 }
 
