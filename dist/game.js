@@ -5,8 +5,15 @@
 
  /* jshint esversion: 6 */
 
+const GRAPHIC_DESIGN = "Graphic Design";
+
 class StartupGame {
   constructor () {
+
+    this.teams = {
+      GRAPHIC_DESIGN: new Team(GRAPHIC_DESIGN, "They draw.", function(l) { return l*60; });
+    };
+
     /**
      * Real number of views
      */
@@ -96,7 +103,7 @@ class StartupGame {
        * them that aren't instances of the objects themselves.
        */
       this.workers = [];
-      loadedData.workers.push(new Worker("First worker", "Test worker", 1, function(level) { return level*60; }));
+      addWorkerToTeam(GRAPHIC_DESIGN, new Worker("John Smith", 0));
       window.requestAnimationFrame(this.step.bind(this));
     }.bind(this))
     .catch(function () {
@@ -105,10 +112,23 @@ class StartupGame {
   }
 
   /**
+   * Adds the given worker to the given team.
+   */
+  addWorkerToTeam (team, worker) {
+    this.teams[team].worker.push(worker);
+  }
+
+  /**
    * Updates the views on the screen.
    */
   updateViews () {
     document.getElementById('views').innerText = "This page has been viewed " + this.views + " time" + (this.views != 1 ? "s." : ".");
+  }
+
+  getWorkerViews () {
+    for (let i = 0; i < this.teams.length; i++) {
+
+    }
   }
 
   /**
@@ -175,7 +195,7 @@ class Team {
   }
 
   getRate (level) {
-    return (!level) ? this.rate(this.level) : this.rate(level);
+    return (!level) ? this.rate(this.workers.length) : this.rate(level);
   }
 }
 

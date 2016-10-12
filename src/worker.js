@@ -27,7 +27,7 @@ class Team {
   }
 
   getRate (level) {
-    return (!level) ? this.rate(this.level) : this.rate(level);
+    return (!level) ? this.rate(this.workers.length) : this.rate(level);
   }
 }
 
