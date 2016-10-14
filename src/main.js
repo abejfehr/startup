@@ -10,9 +10,12 @@ const GRAPHIC_DESIGN = "Graphic Design";
 class StartupGame {
   constructor () {
 
-    this.teams = {
-      GRAPHIC_DESIGN: new Team(GRAPHIC_DESIGN, "They draw.", function(l) { return l*60; });
-    };
+    this.teams = {};
+    this.teams[GRAPHIC_DESIGN] = new Team({
+      n: GRAPHIC_DESIGN,
+      desc: "They draw.",
+      rate: function(lev) { return lev*60; }
+    });
 
     /**
      * Real number of views
@@ -103,7 +106,7 @@ class StartupGame {
        * them that aren't instances of the objects themselves.
        */
       this.workers = [];
-      addWorkerToTeam(GRAPHIC_DESIGN, new Worker("John Smith", 0));
+      this.addWorkerToTeam(GRAPHIC_DESIGN, new Worker("John Smith", 0));
       window.requestAnimationFrame(this.step.bind(this));
     }.bind(this))
     .catch(function () {
@@ -115,7 +118,7 @@ class StartupGame {
    * Adds the given worker to the given team.
    */
   addWorkerToTeam (team, worker) {
-    this.teams[team].worker.push(worker);
+    this.teams[team].workers.push(worker);
   }
 
   /**
@@ -125,10 +128,13 @@ class StartupGame {
     document.getElementById('views').innerText = "This page has been viewed " + this.views + " time" + (this.views != 1 ? "s." : ".");
   }
 
-  getWorkerViews () {
-    for (let i = 0; i < this.teams.length; i++) {
-
+  getWorkerViews (progress) {
+    var workerViews = 0;
+    for (var prop in this.teams) {
+      workerViews = this.teams[prop].getRate() * progress;
     }
+
+    return workerViews;
   }
 
   /**
@@ -141,9 +147,11 @@ class StartupGame {
     this.ticks += progress;
 
     // Add more views to queue
-    for (var i = 0; i < this.workers.length; i++) {
-      this.queuedViews += this.workers[i].getRate() * progress;
-    }
+    // for (var i = 0; i < this.workers.length; i++) {
+    //   this.queuedViews += this.workers[i].getRate() * progress;
+    // }
+
+    this.queuedViews += this.getWorkerViews(progress);    
 
     // Add the floor of the number of views to add
     this.views += Math.floor(this.queuedViews);

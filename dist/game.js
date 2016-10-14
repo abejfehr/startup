@@ -1,4 +1,55 @@
 /**
+ * Purpose: All worker related classes
+ * Source:  worker.js
+ */
+
+ /* jshint esversion: 6 */
+
+/**
+ * Groups workers together into a team.
+ */
+class Team {
+  /**
+   * @param {Object} team - The Object that contains the paramaters
+   *  @param {String} n - The name
+   *  @param {String} desc - The description
+   *  @param {Function} rate
+   *   Calculates the rate of views for the current level
+   *   or the given level.
+   *   @return {Number} _ - The rate of views expressed as a positive rational number
+   *  @param {Array} workers - The list of workers in this group
+   */
+  constructor (team) {
+    this.name = team.n;
+    this.desc = team.desc;
+    this.rate = team.rate;
+    this.workers = (team.workers) ? team.workers : [];
+  }
+
+  getRate () {
+    return this.rate(this.workers.length);
+  }
+}
+
+class Worker {
+  /**
+   * Represents one worker
+   *
+   * @constructor
+   */
+  constructor (n, time) {
+    /**
+     * The name of the worker
+     */
+    this.name = n;
+    /**
+     * The tick that this worker was hired on
+     */
+    this.dateHired = time;
+  }
+}
+
+/**
  * Purpose: The main game loop
  * Source:  main.js
  */
@@ -10,9 +61,12 @@ const GRAPHIC_DESIGN = "Graphic Design";
 class StartupGame {
   constructor () {
 
-    this.teams = {
-      GRAPHIC_DESIGN: new Team(GRAPHIC_DESIGN, "They draw.", function(l) { return l*60; });
-    };
+    this.teams = {};
+    this.teams[GRAPHIC_DESIGN] = new Team({
+      n: GRAPHIC_DESIGN,
+      desc: "They draw.",
+      rate: function(lev) { return lev*60; }
+    });
 
     /**
      * Real number of views
@@ -103,7 +157,7 @@ class StartupGame {
        * them that aren't instances of the objects themselves.
        */
       this.workers = [];
-      addWorkerToTeam(GRAPHIC_DESIGN, new Worker("John Smith", 0));
+      this.addWorkerToTeam(GRAPHIC_DESIGN, new Worker("John Smith", 0));
       window.requestAnimationFrame(this.step.bind(this));
     }.bind(this))
     .catch(function () {
@@ -115,7 +169,7 @@ class StartupGame {
    * Adds the given worker to the given team.
    */
   addWorkerToTeam (team, worker) {
-    this.teams[team].worker.push(worker);
+    this.teams[team].workers.push(worker);
   }
 
   /**
@@ -125,10 +179,13 @@ class StartupGame {
     document.getElementById('views').innerText = "This page has been viewed " + this.views + " time" + (this.views != 1 ? "s." : ".");
   }
 
-  getWorkerViews () {
-    for (let i = 0; i < this.teams.length; i++) {
-
+  getWorkerViews (progress) {
+    var workerViews = 0;
+    for (var prop in this.teams) {
+      workerViews = this.teams[prop].getRate() * progress;
     }
+
+    return workerViews;
   }
 
   /**
@@ -141,9 +198,11 @@ class StartupGame {
     this.ticks += progress;
 
     // Add more views to queue
-    for (var i = 0; i < this.workers.length; i++) {
-      this.queuedViews += this.workers[i].getRate() * progress;
-    }
+    // for (var i = 0; i < this.workers.length; i++) {
+    //   this.queuedViews += this.workers[i].getRate() * progress;
+    // }
+
+    this.queuedViews += this.getWorkerViews(progress);    
 
     // Add the floor of the number of views to add
     this.views += Math.floor(this.queuedViews);
@@ -165,54 +224,3 @@ class StartupGame {
  */
 var game = new StartupGame();
 game.start();
-
-/**
- * Purpose: All worker related classes
- * Source:  worker.js
- */
-
- /* jshint esversion: 6 */
-
-/**
- * Groups workers together into a team.
- */
-class Team {
-  /**
-   * @param {String} n - The name
-   * @param {String} desc - The description
-   * @param {Function} rate
-   *  Calculates the rate of views for the current level
-   *  or the given level.
-   *  @param {Integer} level - to be used to calculate rate of views at this level (optional)
-   *  @return {Number} _ - The rate of views expressed as a positive rational number
-   * @param {Array} workers - The list of workers in this group
-   */
-  constructor (n, desc, rate, workers) {
-    this.name = n;
-    this.desc = desc;
-    this.rate = rate;
-    this.workers = (workers) ? workers : [];
-  }
-
-  getRate (level) {
-    return (!level) ? this.rate(this.workers.length) : this.rate(level);
-  }
-}
-
-class Worker {
-  /**
-   * Represents one worker
-   *
-   * @constructor
-   */
-  constructor (n, time) {
-    /**
-     * The name of the worker
-     */
-    this.name = n;
-    /**
-     * The tick that this worker was hired on
-     */
-    this.dateHired = time;
-  }
-}

@@ -11,7 +11,7 @@ gulp.task('lint', function () {
 });
 
 gulp.task('concat', function () {
-    return gulp.src(['src/**/*.js'])
+    return gulp.src(['src/worker.js', 'src/main.js'])
     .pipe(concat('game.js'))
     .pipe(gulp.dest('./dist/'));
 });
