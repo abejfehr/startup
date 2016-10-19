@@ -5,13 +5,15 @@
 
  /* jshint esversion: 6 */
 
+import Team from './worker';
+
 const GRAPHIC_DESIGN = "Graphic Design";
 
 class StartupGame {
   constructor () {
 
     this.teams = {
-      GRAPHIC_DESIGN: new Team(GRAPHIC_DESIGN, "They draw.", function(l) { return l*60; });
+      // GRAPHIC_DESIGN: new Team(GRAPHIC_DESIGN, "They draw.", function(l) { return l*60; });
     };
 
     /**
