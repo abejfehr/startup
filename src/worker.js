@@ -48,3 +48,5 @@ class Worker {
     this.dateHired = time;
   }
 }
+
+export { Worker, Team };

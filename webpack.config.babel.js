@@ -9,5 +9,6 @@ module.exports = {
 		publicPath: 'dist/',
 		filename: '[name].bundle.js',
 		chunkFilename: '[id].bundle.js'
-	}
+	},
+	devtool: 'inline-source-map'
 };
