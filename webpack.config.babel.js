@@ -1,14 +1,15 @@
 import path from 'path';
+import webpack from 'webpack';
 
 module.exports = {
 	entry: {
-	  preload: './target/main.js'
+	  preload: './target/main.js',
 	},
 	output: {
 		path: path.join(__dirname, 'dist'),
 		publicPath: 'dist/',
 		filename: '[name].bundle.js',
-		chunkFilename: '[id].bundle.js'
+		chunkFilename: '[id].bundle.js',
 	},
-	devtool: 'inline-source-map'
+	devtool: 'cheap-module-source-map',
 };
