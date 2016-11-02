@@ -8,8 +8,8 @@
     "test": "gulp test"
   },
   "repository": {
-    "type": "git",
-    "url": "git+https://github.com/abejfehr/startup.git"
+    "url": "git+https://github.com/abejfehr/startup.git",
+    "type": "git"
   },
   "author": "Abe Fehr & Scott Andrechek",
   "license": "MIT",
@@ -28,6 +28,5 @@
     "webpack": "^1.13.2",
     "webpack-dev-server": "^1.16.2"
   },
-  "dependencies": {
-  }
+  "dependencies": {}
 }
