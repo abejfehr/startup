@@ -11,5 +11,5 @@ module.exports = {
 		filename: '[name].bundle.js',
 		chunkFilename: '[id].bundle.js',
 	},
-	devtool: 'cheap-module-source-map',
+	devtool: 'cheap-module-source-map'
 };
