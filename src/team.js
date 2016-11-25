@@ -20,10 +20,10 @@ export default class Team {
    *  @param {Array} workers - The list of workers in this group
    */
   constructor (team) {
-    this.name = 764;//team.n;
-    // this.desc = team.desc;
-    // this.rate = team.rate;
-    // this.workers = (team.workers) ? team.workers : [];
+    this.name = team.n;
+    this.desc = team.desc;
+    this.rate = team.rate;
+    this.workers = (team.workers) ? team.workers : [];
   }
 
   getRate () {

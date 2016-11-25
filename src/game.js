@@ -9,7 +9,9 @@ import React from 'react';
 
 import Master from './view/Master';
 
-import Team from './worker';
+import Team from './team';
+
+import Worker from './worker'
 
 const GRAPHIC_DESIGN = "Graphic Design";
 
@@ -99,7 +101,7 @@ class StartupGame extends React.Component {
   start () {
     // Loads the data and kicks off the timer as soon as the data is loaded.
     this.load()
-    .then(function (loadedData) {-
+    .then(function (loadedData) {
       this.setState({
         views: loadedData.views + 1,
         /**
@@ -110,17 +112,9 @@ class StartupGame extends React.Component {
       });
       this.queuedViews = loadedData.queuedViews;
 
-      var teams = this.state.teams;
-      teams[GRAPHIC_DESIGN] = new Team({
-        name: GRAPHIC_DESIGN,
-        desc: "They draw.",
-        rate: function(x) { return x * 60; },
-        workers: [],
-      });
-      console.log("HELLO: ", teams);
-      this.setState({ teams });
+      initTeams();
 
-      addWorkerToTeam(GRAPHIC_DESIGN, new Worker("John Smith", 0));
+      this.addWorkerToTeam(GRAPHIC_DESIGN, new Worker("John Smith", 0));
       window.requestAnimationFrame(this.step.bind(this));
     }.bind(this))
     .catch(function () {
@@ -133,14 +127,32 @@ class StartupGame extends React.Component {
    */
   addWorkerToTeam (team, worker) {
     var teams = this.state.teams;
-    teams[team].worker.push(worker);
+    teams[team].workers.push(worker);
     this.setState({teams});
   }
 
-  getWorkerViews () {
+  /**
+   * Creates all the workers and updates the state.
+   */
+  initTeams () {
+    var teams = this.state.teams;
+    teams[GRAPHIC_DESIGN] = new Team({
+      name: GRAPHIC_DESIGN,
+      desc: "They draw.",
+      rate: function(x) { return x * 60; },
+      workers: [],
+    });
+
+    this.setState({ teams });
+  }
+
+  getWorkerViews (progress) {
+    var sum = 0;
     for (let i = 0; i < this.state.teams.length; i++) {
-      // TODO: Ask Scott what this is/does
+      sum += this.state.workers[i].getRate() * progress;
     }
+
+    return sum;
   }
 
   /**
@@ -152,10 +164,7 @@ class StartupGame extends React.Component {
     this.lastTimestamp = timestamp;
     this.ticks += progress;
 
-    // Add more views to queue
-    for (var i = 0; i < this.state.workers.length; i++) {
-      this.queuedViews += this.state.workers[i].getRate() * progress;
-    }
+    this.queuedViews = this.getWorkerViews(progress);
 
     // Add the floor of the number of views to add
     var views = this.state.views + Math.floor(this.queuedViews);
