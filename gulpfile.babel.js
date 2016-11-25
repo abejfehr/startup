@@ -5,6 +5,7 @@ import gutil from 'gulp-util';
 import webpack from 'webpack';
 import webpackConfig from './webpack.config.babel';
 import WebpackDevServer from 'webpack-dev-server';
+import CopyWebpackPlugin from 'copy-webpack-plugin';
 
 gulp.task('default', ['webpack']);
 
@@ -36,6 +37,9 @@ gulp.task('webpack', ['test'], function(callback) {
         'NODE_ENV': JSON.stringify('production')
       },
     }),
+    new CopyWebpackPlugin([
+      { from: 'src/css/style.css', to: 'style.css' }
+    ])
   ];
 
   // run webpack
