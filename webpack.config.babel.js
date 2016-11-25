@@ -11,5 +11,10 @@ module.exports = {
 		filename: '[name].bundle.js',
 		chunkFilename: '[id].bundle.js',
 	},
-	devtool: '#cheap-module-eval-source-map'
+  devtool: '#cheap-module-eval-source-map'
+	module: {
+		loaders: [
+			{ test: /\.css$/, loader: "style-loader!css-loader" },
+		],
+	}
 };
