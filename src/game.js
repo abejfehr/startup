@@ -18,7 +18,6 @@ class StartupGame extends React.Component {
     super();
 
     var teams = {};
-    // teams[GRAPHIC_DESIGN] = new Team(GRAPHIC_DESIGN, "They draw.", function(level) { return level * 60; });
 
     /**
      * The timestamp since the last animation frame step. This is only used
@@ -100,7 +99,7 @@ class StartupGame extends React.Component {
   start () {
     // Loads the data and kicks off the timer as soon as the data is loaded.
     this.load()
-    .then(function (loadedData) {
+    .then(function (loadedData) {-
       this.setState({
         views: loadedData.views + 1,
         /**
@@ -110,6 +109,16 @@ class StartupGame extends React.Component {
         workers: [],
       });
       this.queuedViews = loadedData.queuedViews;
+
+      var teams = this.state.teams;
+      teams[GRAPHIC_DESIGN] = new Team({
+        name: GRAPHIC_DESIGN,
+        desc: "They draw.",
+        rate: function(x) { return x * 60; },
+        workers: [],
+      });
+      console.log("HELLO: ", teams);
+      this.setState({ teams });
 
       addWorkerToTeam(GRAPHIC_DESIGN, new Worker("John Smith", 0));
       window.requestAnimationFrame(this.step.bind(this));
