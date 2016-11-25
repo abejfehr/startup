@@ -6,7 +6,7 @@ class Master extends React.Component {
     super(props);
 
     // Update the title to untitled for the early game
-    document.title = "untitled";
+    document.title = "utitled";
   }
 
   render () {
