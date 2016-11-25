@@ -9,6 +9,10 @@ class Master extends React.Component {
     document.title = "untitled";
   }
 
+  shouldComponentUpdate (props, state) {
+    return this.props.views !== props.views;
+  }
+
   render () {
     // Only render if there are more than 0 views to avoid a flash of 0.
     if (this.props.views > 0) {

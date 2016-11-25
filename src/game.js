@@ -5,6 +5,8 @@
 
  /* jshint esversion: 6 */
 
+import Chance from 'chance';
+
 import React from 'react';
 
 import Master from './view/Master';
@@ -112,9 +114,10 @@ class StartupGame extends React.Component {
       });
       this.queuedViews = loadedData.queuedViews;
 
-      initTeams();
-
-      this.addWorkerToTeam(GRAPHIC_DESIGN, new Worker("John Smith", 0));
+      this.initTeams();
+      
+      this.addWorkerToTeam(GRAPHIC_DESIGN, new Worker(Chance().first() + " " + Chance().last(), 0));
+      console.log("Names: ", this.state.teams[GRAPHIC_DESIGN].workers);
       window.requestAnimationFrame(this.step.bind(this));
     }.bind(this))
     .catch(function () {
