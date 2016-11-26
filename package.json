@@ -6,7 +6,7 @@
   "scripts": {
     "build": "gulp",
     "test": "gulp test",
-    "start": "webpack-dev-server --progress --inline --hot"
+    "start": "webpack-dev-server --progress --inline --hot --port 8000"
   },
   "repository": {
     "url": "git+https://github.com/abejfehr/startup.git",

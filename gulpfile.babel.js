@@ -23,10 +23,6 @@ gulp.task('test', ['babel'], () => {
     });
 });
 
-gulp.task('watch-test', () => {
-  return gulp.watch(['src/**', 'test/**'], ['test']);
-});
-
 gulp.task('webpack', ['test'], function(callback) {
   var myConfig = Object.create(webpackConfig);
   myConfig.plugins = [
@@ -75,20 +71,4 @@ gulp.task('server', ['webpack'], function(callback) {
 		if(err) throw new gutil.PluginError('webpack-dev-server', err);
 		gutil.log('[webpack-dev-server]', 'http://localhost:8080/index.html');
 	});
-});
-
-gulp.task('lint', () => {
-  return gulp.src(['src/**/*.js'])
-    .pipe(jshint())
-    .pipe(jshint.reporter());
-});
-
-gulp.task('copy', () => {
-  return gulp.src('src/**/*.css')
-    .pipe(copy())
-    .pipe(gulp.dest('./dist/'));
-});
-
-gulp.task('watch', () => {
-  gulp.watch(['src/**/*.js', 'src/**/*.css'], ['lint', 'concat', 'copy']);
 });

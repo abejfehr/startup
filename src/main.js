@@ -10,6 +10,8 @@ import {render} from 'react-dom';
 
 import StartupGame from './game';
 
+import './css/style.css';
+
 /**
  * Let's get this party started!
  */

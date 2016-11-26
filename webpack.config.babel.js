@@ -3,28 +3,26 @@ import webpack from 'webpack';
 
 module.exports = {
 	entry: [
-		'webpack-dev-server/client?http://0.0.0.0:8000',
-		'webpack/hot/only-dev-server',
-		'./src/main'
+		'./src/main.js',
 	],
 	output: {
 		path: path.join(__dirname, 'dist'),
 		publicPath: 'dist/',
-		filename: '[name].bundle.js',
-		chunkFilename: '[id].bundle.js',
+		filename: '[name].js',
+		chunkFilename: '[id].js',
 	},
   devtool: '#cheap-module-eval-source-map',
 	module: {
 		loaders: [
-			{ test: /\.css$/, loader: 'style-loader!css-loader' },
 			{
-				test: /\.js$/,
+				test: /\.css$/,
+				loader: 'style!css',
+			},
+			{
+				test: /\.jsx?$/,
 				exclude: '/node_modules/',
 				loader: 'babel',
 				include: __dirname,
-				query: {
-					presets: [ 'es2015', 'react', 'react-hmre' ]
-				}
 			}
 		],
 	}
