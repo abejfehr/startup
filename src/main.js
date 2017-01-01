@@ -19,6 +19,6 @@ document.addEventListener('DOMContentLoaded', function () {
   // Draw the shit on the screen
   render(
     <StartupGame />,
-    document.body
+    document.getElementById("game")
   );
 });

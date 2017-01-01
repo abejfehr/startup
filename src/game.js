@@ -15,6 +15,8 @@ import Team from './team';
 
 import Worker from './worker'
 
+import SaveManager from './savemanager'
+
 class StartupGame extends React.Component {
   constructor () {
     super();
@@ -44,6 +46,11 @@ class StartupGame extends React.Component {
     */
     this.viewsPerMinute = 0;
 
+    /**
+     * Creates a SaveManager that can be used for this game
+     */
+    this.saveManager = new SaveManager();
+
     this.state = {
       /**
        * Real number of views
@@ -72,7 +79,7 @@ class StartupGame extends React.Component {
 
   start () {
     // Loads the data and kicks off the timer as soon as the data is loaded.
-    this.load()
+    this.saveManager.load()
     .then(function (loadedData) {
       this.setState({
         views: loadedData.views + 1,
@@ -146,7 +153,10 @@ class StartupGame extends React.Component {
     this.queuedViews %= 1;
 
     // Saves the game, probably way too often
-    this.save();
+    this.saveManager.save({
+      views: this.state.views,
+      queuedViews: this.queuedViews,
+    });
 
     // Recursively do this again
     window.requestAnimationFrame(this.step.bind(this));

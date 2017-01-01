@@ -18,13 +18,10 @@ export default class SaveManager {
   /**
    * Saves the game's data asynchronously to LocalStorage
    */
-  save () {
+  save (saveObject) {
     setTimeout(function () {
       // btoa() is used for basic encryption
-      localStorage.setItem("saveData", btoa(JSON.stringify({
-        views: this.state.views,
-        queuedViews: this.queuedViews,
-      })));
+      localStorage.setItem("saveData", btoa(JSON.stringify(saveObject)));
     }.bind(this), 0);
   }
 
