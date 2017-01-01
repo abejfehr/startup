@@ -15,8 +15,6 @@ import Team from './team';
 
 import Worker from './worker'
 
-const GRAPHIC_DESIGN = "Graphic Design";
-
 class StartupGame extends React.Component {
   constructor () {
     super();
@@ -72,34 +70,6 @@ class StartupGame extends React.Component {
     this.start();
   }
 
-  /**
-   * Saves the game's data asynchronously to LocalStorage
-   */
-  save () {
-    setTimeout(function () {
-      // btoa() is used for basic encryption
-      localStorage.setItem("saveData", btoa(JSON.stringify({
-        views: this.state.views,
-        queuedViews: this.queuedViews,
-      })));
-    }.bind(this), 0);
-  }
-
-  /**
-   * Loads the game's data asynchronously from LocalStorage.
-   */
-  load () {
-    return new Promise(function (resolve, reject) {
-      setTimeout(function () {
-        if (localStorage.getItem("saveData") === null) {
-          reject();
-        } else {
-          resolve(JSON.parse(atob(localStorage.getItem("saveData"))));
-        }
-      }.bind(this), 0);
-    }.bind(this));
-  }
-
   start () {
     // Loads the data and kicks off the timer as soon as the data is loaded.
     this.load()
@@ -116,8 +86,9 @@ class StartupGame extends React.Component {
 
       this.initTeams();
 
-      this.addWorkerToTeam(GRAPHIC_DESIGN, new Worker(Chance().first() + " " + Chance().last(), 0));
-      console.log("Names: ", this.state.teams[GRAPHIC_DESIGN].workers);
+      // I'm commenting this out for now, I think Scott only used this for testing
+      // this.addWorkerToTeam(GRAPHIC_DESIGN, new Worker(Chance().first() + " " + Chance().last(), 0));
+      // console.log("Names: ", this.state.teams[GRAPHIC_DESIGN].workers);
       window.requestAnimationFrame(this.step.bind(this));
     }.bind(this))
     .catch(function () {
