@@ -1,3 +1,11 @@
+# Don't commit the node modules
 node_modules
+
+# These are files that Mac OS X makes for you
 .DS_Store
+
+# These are all the build errors. Why would we store that?
+npm-debug.log
+
+# This directory has all the built stuff, but I'm not sure why. Ignoring it anyways
 target
