@@ -20,6 +20,9 @@
   "homepage": "https://github.com/abejfehr/startup#readme",
   "dependencies": {
     "babel-loader": "^6.2.8",
+    "babel-preset-es2015": "^6.18.0",
+    "babel-preset-react": "^6.16.0",
+    "babel-preset-react-hmre": "^1.1.1",
     "chai": "^3.5.0",
     "chance": "^1.0.4",
     "copy-webpack-plugin": "^4.0.1",
