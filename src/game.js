@@ -115,7 +115,7 @@ class StartupGame extends React.Component {
       this.queuedViews = loadedData.queuedViews;
 
       this.initTeams();
-      
+
       this.addWorkerToTeam(GRAPHIC_DESIGN, new Worker(Chance().first() + " " + Chance().last(), 0));
       console.log("Names: ", this.state.teams[GRAPHIC_DESIGN].workers);
       window.requestAnimationFrame(this.step.bind(this));
@@ -181,8 +181,16 @@ class StartupGame extends React.Component {
     window.requestAnimationFrame(this.step.bind(this));
   }
 
+  /**
+   * The callback for handling workers being added to the game
+   */
+  onHire (team) {
+    // Add a new worker to a specific team
+    console.log(`Someone has been hired to work on ${team}`);
+  }
+
   render () {
-    return <Master {...this.state} />
+    return <Master {...this.state} onHire={this.onHire} />
   }
 }
 

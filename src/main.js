@@ -16,7 +16,6 @@ import './css/style.css';
  * Let's get this party started!
  */
 document.addEventListener('DOMContentLoaded', function () {
-  console.log("asdf");
   // Draw the shit on the screen
   render(
     <StartupGame />,
