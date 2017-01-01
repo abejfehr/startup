@@ -11,6 +11,19 @@ import {atob, btoa} from 'abab'
 // Class Under Test
 import SaveManager from '../target/savemanager';
 
+beforeEach(() => {
+  // Insert some default save data for testing
+  localStorage.setItem("saveData", btoa(JSON.stringify({
+    views: 3, queuedViews: 0.5
+  })));
+});
+
+afterEach(() => {
+  // Clear all the save data each time
+  localStorage.clear();
+  localStorage.itemInsertionCallback = null;
+});
+
 describe('the save manager', () => {
   describe('the basics', () => {
     it('should be instantiable', () => {
@@ -26,15 +39,14 @@ describe('the save manager', () => {
   	});
 
     it('should load a game object when there is one in localStorage', () => {
-      localStorage.setItem("saveData", btoa(JSON.stringify({views: 3, queuedViews: 0.5})));
-
   		var saveManager = new SaveManager();
-      expect(saveManager.load()).to.eventually.have.property('views');
-      expect(saveManager.load()).to.eventually.have.property('queuedViews');
+      expect(saveManager.load()).to.eventually.have.property('views', 3);
+      expect(saveManager.load()).to.eventually.have.property('queuedViews', 0.5);
   	});
 
     it('should reject a promise when there is nothing in localStorage', () => {
-      expect(1).to.be(2);
+      var saveManager = new SaveManager();
+      expect(saveManager.load()).to.eventually.be.rejected;
     });
   });
 
@@ -45,7 +57,15 @@ describe('the save manager', () => {
   	});
 
     it('should save a given saveObject into localStorage', () => {
-      expect(1).to.be(2);
+      var saveManager = new SaveManager();
+      saveManager.save({
+        views: 7,
+        queuedViews: 0.88,
+      }).then(() => {
+        // Check in local storage directly to see if the data is there
+        expect(JSON.parse(atob(localStorage.getItem('saveData')))).to.have.property('views', 7);
+        expect(JSON.parse(atob(localStorage.getItem('saveData')))).to.have.property('queuedViews', 0.88);
+      });
     });
   });
 

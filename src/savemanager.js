@@ -1,4 +1,6 @@
-export default class SaveManager {
+import { atob, btoa } from 'abab';
+
+class SaveManager {
 
   /**
    * Loads the game's data asynchronously from LocalStorage.
@@ -19,10 +21,14 @@ export default class SaveManager {
    * Saves the game's data asynchronously to LocalStorage
    */
   save (saveObject) {
-    setTimeout(function () {
-      // btoa() is used for basic encryption
-      localStorage.setItem("saveData", btoa(JSON.stringify(saveObject)));
-    }.bind(this), 0);
+    return new Promise(function (resolve, reject) {
+      setTimeout(function () {
+        // btoa() is used for basic encryption
+        localStorage.setItem("saveData", btoa(JSON.stringify(saveObject)));
+        resolve();
+      }.bind(this), 0);
+    });
   }
-
 }
+
+export default SaveManager;
