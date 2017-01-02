@@ -9,3 +9,6 @@ npm-debug.log
 
 # This directory has all the built stuff, but I'm not sure why. Ignoring it anyways
 target
+
+# My special TODO files that no one else needs to know about
+TODO.md

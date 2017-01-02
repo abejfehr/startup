@@ -153,10 +153,24 @@ class StartupGame extends React.Component {
     this.queuedViews %= 1;
 
     // Saves the game, probably way too often
+    // Also constructs the list of workers to save
+    var workers = [];
+    debugger;
+    for (let [teamName, team] of Object.entries(this.state.teams)) {
+      for (let worker of team.workers) {
+        workers.push({
+          name: worker.name,
+          team: teamName,
+        });
+      }
+    }
+    debugger;
     this.saveManager.save({
       views: this.state.views,
       queuedViews: this.queuedViews,
+      workers,
     });
+    debugger;
 
     // Recursively do this again
     window.requestAnimationFrame(this.step.bind(this));

@@ -2,11 +2,14 @@
 import chai from 'chai';
 import chaiAsPromised from 'chai-as-promised';
 const expect = chai.use(chaiAsPromised).expect;
-const should = chai.use(chaiAsPromised).should;
+const should = chai.use(chaiAsPromised).should();
 
 // Mock Libraries
 import 'mock-local-storage'
 import {atob, btoa} from 'abab'
+
+// Other classes
+import TeamType from '../target/teamtype';
 
 // Class Under Test
 import SaveManager from '../target/savemanager';
@@ -14,7 +17,16 @@ import SaveManager from '../target/savemanager';
 beforeEach(() => {
   // Insert some default save data for testing
   localStorage.setItem("saveData", btoa(JSON.stringify({
-    views: 3, queuedViews: 0.5
+    views: 3, queuedViews: 0.5, workers: [
+      {
+        name: "Elon Musk",
+        team: TeamType.GRAPHIC_DESIGN,
+      },
+      {
+        name: "Will Smith",
+        team: TeamType.GRAPHIC_DESIGN,
+      },
+    ],
   })));
 });
 
@@ -45,8 +57,15 @@ describe('the save manager', () => {
   	});
 
     it('should reject a promise when there is nothing in localStorage', () => {
+      localStorage.clear();
+      localStorage.itemInsertionCallback = null;
       var saveManager = new SaveManager();
       expect(saveManager.load()).to.eventually.be.rejected;
+    });
+
+    it('should be able to handle workers when workers were saved', () => {
+      var saveManager = new SaveManager();
+      saveManager.load().should.eventually.have.property('workers').with.length(2);
     });
   });
 
@@ -61,10 +80,19 @@ describe('the save manager', () => {
       saveManager.save({
         views: 7,
         queuedViews: 0.88,
+        workers: [
+          {
+            name: "Anna Kendrick Lamar",
+            team: TeamType.GRAPHIC_DESIGN,
+          },
+        ],
       }).then(() => {
         // Check in local storage directly to see if the data is there
         expect(JSON.parse(atob(localStorage.getItem('saveData')))).to.have.property('views', 7);
         expect(JSON.parse(atob(localStorage.getItem('saveData')))).to.have.property('queuedViews', 0.88);
+        expect(JSON.parse(atob(localStorage.getItem('saveData')))).to.have.property('workers').with.length(1);
+        expect(JSON.parse(atob(localStorage.getItem('saveData')))).to.have.deep.property('workers[0].name', 'Anna Kendrick Lamar');
+        expect(JSON.parse(atob(localStorage.getItem('saveData')))).to.have.deep.property('workers[0].team', TeamType.GRAPHIC_DESIGN);
       });
     });
   });
