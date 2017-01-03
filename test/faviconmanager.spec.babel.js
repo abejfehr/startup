@@ -8,12 +8,6 @@ jsdom();
 // Class Under Test
 import FaviconManager from '../target/faviconmanager';
 
-beforeEach(() => {
-});
-
-afterEach(() => {
-});
-
 describe('the save manager', () => {
   describe('the basics', () => {
     it('should be instantiable', () => {
