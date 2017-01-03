@@ -24,9 +24,14 @@ export default class Team {
     this.desc = team.desc;
     this.rate = team.rate;
     this.workers = (team.workers) ? team.workers : [];
+    this.cost = team.cost;
   }
 
   getRate () {
     return this.rate(this.workers.length);
+  }
+
+  getCost () {
+    return this.cost(this.workers.length);
   }
 }

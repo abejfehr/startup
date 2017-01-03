@@ -134,8 +134,9 @@ class StartupGame extends React.Component {
     teams[TeamType.GRAPHIC_DESIGN] = new Team({
       name: TeamType.GRAPHIC_DESIGN,
       desc: "They draw.",
-      rate: function(x) { return x * 10; },
+      rate: x => x * 10,
       workers: [],
+      cost: n => n * n + 5,
     });
 
     this.setState({ teams });
@@ -191,13 +192,21 @@ class StartupGame extends React.Component {
    * The callback for handling workers being added to the game
    */
   onHire (team) {
-    // Add a new worker to a specific team
-    console.log(`Someone has been hired to work on ${team}`);
+    // Create the worker
     var newWorker = new Worker(Chance().first() + " " + Chance().last(), 0);
+
+    // Pay for the worker
+    var views = this.state.views;
+    var cost = this.state.teams[team].getCost();
+    views -= cost;
+
+    // Add the worker to the team and the workers array
     this.addWorkerToTeam(team, newWorker);
     var workers = this.state.workers;
     workers.push(newWorker);
-    this.setState({ workers });
+
+    // Update the changes in the state
+    this.setState({ workers, views });
   }
 
   render () {

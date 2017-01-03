@@ -27,7 +27,7 @@ class WorkersTable extends React.Component {
         <tr>
           <td colSpan="2">
             <a href="javascript:void(0)" onClick={() => this.props.onHire(TeamTypes.GRAPHIC_DESIGN)}>
-              Hire New Graphic Designer
+              Hire New Graphic Designer ({this.props.teams[TeamTypes.GRAPHIC_DESIGN].getCost()} views)
             </a>
           </td>
         </tr>
