@@ -34,7 +34,7 @@ class StartupGame extends React.Component {
     /**
      * Nominal number of views
      */
-    this.queuedViews = 1;
+    this.queuedViews = 0;
 
     /**
     * The number of ticks that have passed in the game so far
@@ -176,7 +176,7 @@ class StartupGame extends React.Component {
         });
       }
     }
-    
+
     this.saveManager.save({
       views: this.state.views,
       queuedViews: this.queuedViews,
