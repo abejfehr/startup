@@ -116,6 +116,10 @@ class StartupGame extends React.Component {
       window.requestAnimationFrame(this.step.bind(this));
     }.bind(this))
     .catch(function () {
+      this.setState({
+        views: 1,
+        workers: [],
+      });
       window.requestAnimationFrame(this.step.bind(this));
     }.bind(this));
   }
