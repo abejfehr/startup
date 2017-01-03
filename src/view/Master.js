@@ -23,7 +23,7 @@ class Master extends React.Component {
       </p> :
       <div />
     }
-    { this.props.views > 5 ?
+    { this.props.views >= 5 ?
       <WorkersTable workers={this.props.workers} onHire={this.props.onHire} /> :
       <div />
     }
