@@ -101,14 +101,9 @@ class StartupGame extends React.Component {
 
       this.setState({
         views: loadedData.views + 1,
-        /**
-         * TODO: Workers aren't persistent yet, we need some way of storing
-         * them that aren't instances of the objects themselves.
-         */
         workers,
       });
       this.queuedViews = loadedData.queuedViews;
-
 
       // I'm commenting this out for now, I think Scott only used this for testing
       // this.addWorkerToTeam(GRAPHIC_DESIGN, new Worker(Chance().first() + " " + Chance().last(), 0));
@@ -200,7 +195,6 @@ class StartupGame extends React.Component {
   onHire (team) {
     // Add a new worker to a specific team
     console.log(`Someone has been hired to work on ${team}`);
-    debugger;
     var newWorker = new Worker(Chance().first() + " " + Chance().last(), 0);
     this.addWorkerToTeam(team, newWorker);
     var workers = this.state.workers;
@@ -209,7 +203,7 @@ class StartupGame extends React.Component {
   }
 
   render () {
-    return <Master {...this.state} onHire={this.onHire} />
+    return <Master {...this.state} onHire={this.onHire.bind(this)} />
   }
 }
 

@@ -1,8 +1,5 @@
 // Assertions
-import chai from 'chai';
-import chaiAsPromised from 'chai-as-promised';
-const expect = chai.use(chaiAsPromised).expect;
-const should = chai.use(chaiAsPromised).should();
+import { expect } from 'chai';
 
 // Mock the DOM
 import jsdom from 'mocha-jsdom';
@@ -26,7 +23,8 @@ describe('the save manager', () => {
 
     it('should give the page a blank favicon by default', () => {
       var faviconManager = new FaviconManager();
-      var faviconLink = document.querySelector('link[rel*=icon]');
+      var faviconLink = document.querySelector('link[type*=icon]');
+      expect(faviconLink).to.not.be.null;
       expect(faviconLink).to.have.property('href', 'assets/favicons/favicon.ico');
     });
   });

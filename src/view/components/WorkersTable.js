@@ -9,16 +9,24 @@ class WorkersTable extends React.Component {
   }
 
   render () {
-    return <table>
+    var workers = this.props.workers.map((worker) => {
+      return <tr key={worker.name}>
+        <td>{worker.name}</td>
+        <td><a href="javascript:void(0)">fire</a></td>
+      </tr>
+    });
+
+    return <table className="old-table">
       <thead>
         <tr>
-          <th colSpan="3">Graphic Designers</th>
+          <th colSpan="2">Graphic Designers</th>
         </tr>
       </thead>
       <tbody>
+        {workers}
         <tr>
-          <td colSpan="3">
-            <a href="javascript:void()" onClick={() => this.props.onHire(TeamTypes.GRAPHIC_DESIGN)}>
+          <td colSpan="2">
+            <a href="javascript:void(0)" onClick={() => this.props.onHire(TeamTypes.GRAPHIC_DESIGN)}>
               Hire New Graphic Designer
             </a>
           </td>

@@ -11,10 +11,6 @@ class Master extends React.Component {
     document.title = "Untitled";
   }
 
-  shouldComponentUpdate (props, state) {
-    return this.props.views !== props.views;
-  }
-
   render () {
     return <div>
     { this.props.views > 0 ?
