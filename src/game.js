@@ -105,12 +105,10 @@ class StartupGame extends React.Component {
       });
       this.queuedViews = loadedData.queuedViews;
 
-      // I'm commenting this out for now, I think Scott only used this for testing
-      // this.addWorkerToTeam(GRAPHIC_DESIGN, new Worker(Chance().first() + " " + Chance().last(), 0));
-      // console.log("Names: ", this.state.teams[GRAPHIC_DESIGN].workers);
       window.requestAnimationFrame(this.step.bind(this));
     }.bind(this))
     .catch(function () {
+      // There is no save file yet
       this.setState({
         views: 1,
         workers: [],
@@ -125,7 +123,7 @@ class StartupGame extends React.Component {
   addWorkerToTeam (team, worker) {
     var teams = this.state.teams;
     teams[team].workers.push(worker);
-    this.setState({teams});
+    this.setState({ teams });
   }
 
   /**
@@ -136,7 +134,7 @@ class StartupGame extends React.Component {
     teams[TeamType.GRAPHIC_DESIGN] = new Team({
       name: TeamType.GRAPHIC_DESIGN,
       desc: "They draw.",
-      rate: function(x) { return x * 60; },
+      rate: function(x) { return x * 10; },
       workers: [],
     });
 
@@ -145,10 +143,9 @@ class StartupGame extends React.Component {
 
   getWorkerViews (progress) {
     var sum = 0;
-    for (let i = 0; i < this.state.teams.length; i++) {
-      sum += this.state.workers[i].getRate() * progress;
+    for (let [teamName, team] of Object.entries(this.state.teams)) {
+      sum += team.getRate() * progress;
     }
-
     return sum;
   }
 
@@ -161,11 +158,11 @@ class StartupGame extends React.Component {
     this.lastTimestamp = timestamp;
     this.ticks += progress;
 
-    this.queuedViews = this.getWorkerViews(progress);
+    this.queuedViews += this.getWorkerViews(progress);
 
     // Add the floor of the number of views to add
     var views = this.state.views + Math.floor(this.queuedViews);
-    this.setState({views});
+    this.setState({ views });
     this.queuedViews %= 1;
 
     // Saves the game, probably way too often
@@ -179,6 +176,7 @@ class StartupGame extends React.Component {
         });
       }
     }
+    
     this.saveManager.save({
       views: this.state.views,
       queuedViews: this.queuedViews,
