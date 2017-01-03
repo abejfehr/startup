@@ -12,10 +12,12 @@ import React from 'react';
 import Master from './view/Master';
 
 import Team from './team';
-import Worker from './worker'
+import Worker from './worker';
 
-import SaveManager from './savemanager'
-import FaviconManager from './faviconmanager'
+import SaveManager from './savemanager';
+import FaviconManager from './faviconmanager';
+
+import TeamType from './teamtype';
 
 class StartupGame extends React.Component {
   constructor () {
@@ -86,17 +88,27 @@ class StartupGame extends React.Component {
     // Loads the data and kicks off the timer as soon as the data is loaded.
     this.saveManager.load()
     .then(function (loadedData) {
+      // Initialize the different team types
+      this.initTeams();
+
+      // Go through the loaded data and get all the workers
+      var workers = [];
+      for (let worker of loadedData.workers) {
+        var newWorker = new Worker(worker.name, 0);
+        this.addWorkerToTeam(worker.team, newWorker);
+        workers.push(newWorker);
+      }
+
       this.setState({
         views: loadedData.views + 1,
         /**
          * TODO: Workers aren't persistent yet, we need some way of storing
          * them that aren't instances of the objects themselves.
          */
-        workers: [],
+        workers,
       });
       this.queuedViews = loadedData.queuedViews;
 
-      this.initTeams();
 
       // I'm commenting this out for now, I think Scott only used this for testing
       // this.addWorkerToTeam(GRAPHIC_DESIGN, new Worker(Chance().first() + " " + Chance().last(), 0));
@@ -122,8 +134,8 @@ class StartupGame extends React.Component {
    */
   initTeams () {
     var teams = this.state.teams;
-    teams[GRAPHIC_DESIGN] = new Team({
-      name: GRAPHIC_DESIGN,
+    teams[TeamType.GRAPHIC_DESIGN] = new Team({
+      name: TeamType.GRAPHIC_DESIGN,
       desc: "They draw.",
       rate: function(x) { return x * 60; },
       workers: [],
@@ -184,6 +196,12 @@ class StartupGame extends React.Component {
   onHire (team) {
     // Add a new worker to a specific team
     console.log(`Someone has been hired to work on ${team}`);
+    debugger;
+    var newWorker = new Worker(Chance().first() + " " + Chance().last(), 0);
+    this.addWorkerToTeam(team, newWorker);
+    var workers = this.state.workers;
+    workers.push(newWorker);
+    this.setState({ workers });
   }
 
   render () {
