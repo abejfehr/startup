@@ -39,22 +39,22 @@ afterEach(() => {
 describe('the save manager', () => {
   describe('the basics', () => {
     it('should be instantiable', () => {
-  		var saveManager = new SaveManager();
-  		expect(saveManager).to.not.be.null;
-  	});
+      var saveManager = new SaveManager();
+      expect(saveManager).to.not.be.null;
+    });
   });
 
   describe('loading data', () => {
     it('should have functionality for loading previously saved data', () => {
-  		var saveManager = new SaveManager();
-  		expect(saveManager.load).to.not.be.undefined;
-  	});
+      var saveManager = new SaveManager();
+      expect(saveManager.load).to.not.be.undefined;
+    });
 
     it('should load a game object when there is one in localStorage', () => {
-  		var saveManager = new SaveManager();
+      var saveManager = new SaveManager();
       expect(saveManager.load()).to.eventually.have.property('views', 3);
       expect(saveManager.load()).to.eventually.have.property('queuedViews', 0.5);
-  	});
+    });
 
     it('should reject a promise when there is nothing in localStorage', () => {
       localStorage.clear();
@@ -71,9 +71,9 @@ describe('the save manager', () => {
 
   describe('saving data', () => {
     it('should have functionality for saving new data', () => {
-  		var saveManager = new SaveManager();
-  		expect(saveManager.save).to.not.be.undefined;
-  	});
+      var saveManager = new SaveManager();
+      expect(saveManager.save).to.not.be.undefined;
+    });
 
     it('should save a given saveObject into localStorage', () => {
       var saveManager = new SaveManager();

@@ -12,10 +12,10 @@ import React from 'react';
 import Master from './view/Master';
 
 import Team from './team';
-
 import Worker from './worker'
 
 import SaveManager from './savemanager'
+import FaviconManager from './faviconmanager'
 
 class StartupGame extends React.Component {
   constructor () {
@@ -50,6 +50,11 @@ class StartupGame extends React.Component {
      * Creates a SaveManager that can be used for this game
      */
     this.saveManager = new SaveManager();
+
+    /**
+     * Creates a FaviconManager
+     */
+    this.faviconManager = new FaviconManager();
 
     this.state = {
       /**
@@ -155,7 +160,6 @@ class StartupGame extends React.Component {
     // Saves the game, probably way too often
     // Also constructs the list of workers to save
     var workers = [];
-    debugger;
     for (let [teamName, team] of Object.entries(this.state.teams)) {
       for (let worker of team.workers) {
         workers.push({
@@ -164,13 +168,11 @@ class StartupGame extends React.Component {
         });
       }
     }
-    debugger;
     this.saveManager.save({
       views: this.state.views,
       queuedViews: this.queuedViews,
       workers,
     });
-    debugger;
 
     // Recursively do this again
     window.requestAnimationFrame(this.step.bind(this));
