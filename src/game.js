@@ -193,7 +193,7 @@ class StartupGame extends React.Component {
    */
   onHire (team) {
     // Create the worker
-    var newWorker = new Worker(Chance().first() + " " + Chance().last(), 0);
+    var newWorker = new Worker(Chance().name(), 0);
 
     // Pay for the worker
     var views = this.state.views;

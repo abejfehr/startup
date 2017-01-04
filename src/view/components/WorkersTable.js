@@ -6,6 +6,10 @@ class WorkersTable extends React.Component {
 
   constructor (props) {
     super(props);
+
+    this.state = {
+      visible: false,
+    }
   }
 
   render () {
@@ -16,23 +20,36 @@ class WorkersTable extends React.Component {
       </tr>
     });
 
-    return <table className="old-table">
-      <thead>
-        <tr>
-          <th colSpan="2">Graphic Designers</th>
-        </tr>
-      </thead>
-      <tbody>
-        {workers}
-        <tr>
-          <td colSpan="2">
-            <a href="javascript:void(0)" onClick={() => this.props.onHire(TeamTypes.GRAPHIC_DESIGN)}>
-              Hire New Graphic Designer ({this.props.teams[TeamTypes.GRAPHIC_DESIGN].getCost()} views)
-            </a>
-          </td>
-        </tr>
-      </tbody>
-    </table>;
+    return <div>
+      <a href="javascript:void(0)" onClick={() => this.setState({visible: !this.state.visible})}>
+        {
+          this.state.visible ?
+          "Hide Employees" :
+          "Manage Employees"
+        }
+      </a>
+      {
+        this.state.visible ?
+        <table className="old-table">
+          <thead>
+            <tr>
+              <th colSpan="2">Graphic Designers</th>
+            </tr>
+          </thead>
+          <tbody>
+            {workers}
+            <tr>
+              <td colSpan="2">
+                <a href="javascript:void(0)" onClick={() => this.props.onHire(TeamTypes.GRAPHIC_DESIGN)}>
+                  Hire New Graphic Designer ({this.props.teams[TeamTypes.GRAPHIC_DESIGN].getCost()} views)
+                </a>
+              </td>
+            </tr>
+          </tbody>
+        </table> :
+        <div />
+      }
+    </div>;
   }
 
 }

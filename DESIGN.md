@@ -20,7 +20,10 @@ The sava data is a base64 encoded JSON object, with the following attributes:
 
 ## Worker Data
 
-The worker data is the data for each individual worker.
+The worker data is the data for each individual worker. The following fields are stored:
+
+* name - The name of the worker. This was randomly generated on creation
+* team - The team that the worker belongs to.
 
 ## The Ticks
 
