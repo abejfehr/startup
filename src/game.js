@@ -13,6 +13,7 @@ import Master from './view/Master';
 import SaveManager from './savemanager';
 import Team from './team';
 import TeamType from './teamtype';
+import TitleManager from './titlemanager';
 import Worker from './worker';
 
 class StartupGame extends React.Component {
@@ -53,6 +54,7 @@ class StartupGame extends React.Component {
      * Creates a FaviconManager
      */
     this.faviconManager = new FaviconManager();
+    this.titleManager = new TitleManager();
 
     this.state = {
       /**
@@ -170,6 +172,10 @@ class StartupGame extends React.Component {
     this.setState({ views, totalViews });
     this.queuedViews %= 1;
 
+    // See if there's any reason to update the favicon or the title
+    this.titleManager.update(totalViews);
+    this.faviconManager.update(totalViews);
+
     // Saves the game, probably way too often
     // Also constructs the list of workers to save
     var workers = [];
@@ -181,7 +187,6 @@ class StartupGame extends React.Component {
         });
       }
     }
-
     this.saveManager.save({
       views,
       queuedViews: this.queuedViews,
