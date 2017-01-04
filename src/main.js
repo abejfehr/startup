@@ -10,7 +10,7 @@ import {render} from 'react-dom';
 
 import StartupGame from './game';
 
-import './css/style.css';
+import './css/main.scss';
 
 /**
  * Let's get this party started!
@@ -19,6 +19,6 @@ document.addEventListener('DOMContentLoaded', function () {
   // Draw the shit on the screen
   render(
     <StartupGame />,
-    document.getElementById("game")
+    document.getElementById("page")
   );
 });

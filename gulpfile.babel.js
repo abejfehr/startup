@@ -32,9 +32,6 @@ gulp.task('webpack', ['test'], function(callback) {
         'NODE_ENV': JSON.stringify('production')
       },
     }),
-    new CopyWebpackPlugin([
-      { from: 'src/css/style.css', to: 'style.css' }
-    ]),
     new webpack.optimize.UglifyJsPlugin({
       compress: {
         drop_debugger: false

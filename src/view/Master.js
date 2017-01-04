@@ -9,7 +9,9 @@ class Master extends React.Component {
   }
 
   render () {
-    return <div className="website">
+    var classNames = this.props.workers.length >= 1 ? 'css1' : '';
+
+    return <div className={"website " + classNames}>
             { this.props.totalViews >= 100 ?
               <div className="header">
                 <h1 className="headline">Your Startup</h1>
