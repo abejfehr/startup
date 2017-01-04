@@ -17,7 +17,7 @@ describe('the save manager', () => {
 
     it('should give the page a blank favicon by default', () => {
       var faviconManager = new FaviconManager();
-      var faviconLink = document.querySelector('link[type*=icon]');
+      var faviconLink = document.querySelector('link[rel*=icon]');
       expect(faviconLink).to.not.be.null;
       expect(faviconLink).to.have.property('href', 'assets/favicons/favicon.ico');
     });
