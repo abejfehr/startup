@@ -4298,6 +4298,10 @@ react-dom@^15.4.1:
     loose-envify "^1.1.0"
     object-assign "^4.1.0"
 
+react-google-ad:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/react-google-ad/-/react-google-ad-1.0.2.tgz#ae95e1dbc4c5fc5e1c7054c585e545cf10d0509d"
+
 react-hot-loader@^3.0.0-beta.6:
   version "3.0.0-beta.6"
   resolved "https://registry.yarnpkg.com/react-hot-loader/-/react-hot-loader-3.0.0-beta.6.tgz#463fac0bfc8b63a8385258af20c91636abce75f4"
