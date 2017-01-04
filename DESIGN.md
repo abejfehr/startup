@@ -16,6 +16,7 @@ The sava data is a base64 encoded JSON object, with the following attributes:
 
 * views - The number of views that are currently being displayed on the screen
 * queuedViews - The fractional number of views that will be added to the screen on the next tick
+* totalViews - The total number of views that have ever been earned
 * workers - The list of workers that the user has. Each worker is also a JSON object and gets recreated dynamically on each load
 
 ## Worker Data

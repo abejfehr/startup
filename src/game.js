@@ -6,18 +6,14 @@
  /* jshint esversion: 6 */
 
 import Chance from 'chance';
-
 import React from 'react';
 
-import Master from './view/Master';
-
-import Team from './team';
-import Worker from './worker';
-
-import SaveManager from './savemanager';
 import FaviconManager from './faviconmanager';
-
+import Master from './view/Master';
+import SaveManager from './savemanager';
+import Team from './team';
 import TeamType from './teamtype';
+import Worker from './worker';
 
 class StartupGame extends React.Component {
   constructor () {
@@ -60,6 +56,11 @@ class StartupGame extends React.Component {
 
     this.state = {
       /**
+       * Total number of views since the beginning of the game
+       */
+      totalViews: 0,
+
+      /**
        * Real number of views
        */
       views: 0,
@@ -101,6 +102,7 @@ class StartupGame extends React.Component {
 
       this.setState({
         views: loadedData.views + 1,
+        totalViews: loadedData.totalViews + 1,
         workers,
       });
       this.queuedViews = loadedData.queuedViews;
@@ -111,6 +113,7 @@ class StartupGame extends React.Component {
       // There is no save file yet
       this.setState({
         views: 1,
+        totalViews: 1, // Should match the views in the beginning
         workers: [],
       });
       window.requestAnimationFrame(this.step.bind(this));
@@ -163,7 +166,8 @@ class StartupGame extends React.Component {
 
     // Add the floor of the number of views to add
     var views = this.state.views + Math.floor(this.queuedViews);
-    this.setState({ views });
+    var totalViews = this.state.totalViews + Math.floor(this.queuedViews);
+    this.setState({ views, totalViews });
     this.queuedViews %= 1;
 
     // Saves the game, probably way too often
@@ -179,8 +183,9 @@ class StartupGame extends React.Component {
     }
 
     this.saveManager.save({
-      views: this.state.views,
+      views,
       queuedViews: this.queuedViews,
+      totalViews,
       workers,
     });
 
@@ -192,12 +197,17 @@ class StartupGame extends React.Component {
    * The callback for handling workers being added to the game
    */
   onHire (team) {
+    // Determine the cost
+    var cost = this.state.teams[team].getCost();
+    var views = this.state.views;
+
+    // If we don't have enough, we can't hire
+    if (views < cost) { return; }
+
     // Create the worker
     var newWorker = new Worker(Chance().name(), 0);
 
     // Pay for the worker
-    var views = this.state.views;
-    var cost = this.state.teams[team].getCost();
     views -= cost;
 
     // Add the worker to the team and the workers array
