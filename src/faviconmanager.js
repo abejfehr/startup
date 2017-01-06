@@ -8,11 +8,11 @@ class FaviconManager {
 
   update (skills) {
     if (skills.indexOf('favicon') > -1) {
-      if (this.link.href.indexOf('basic.ico') < 0) {
+      if (this.link.href && this.link.href.indexOf('basic.ico') < 0) {
         this.link.href = 'assets/favicons/basic.ico';
       }
     } else {
-      if (this.link.href.indexOf('transparent.ico') < 0) {
+      if (this.link.href && this.link.href.indexOf('transparent.ico') < 0) {
         this.link.href = 'assets/favicons/transparent.ico';
       }
     }
