@@ -112,10 +112,9 @@ class StartupGame extends React.Component {
         totalViews: loadedData.totalViews + 1,
         workers,
         skills: loadedData.skills,
+        multiplier: loadedData.multiplier,
       });
       this.queuedViews = loadedData.queuedViews;
-
-      this.multiplier = loadedData.multiplier;
 
       window.requestAnimationFrame(this.step.bind(this));
     }.bind(this))
@@ -203,6 +202,7 @@ class StartupGame extends React.Component {
       totalViews,
       workers,
       skills: this.state.skills,
+      multiplier: this.state.multiplier,
     });
 
     // Recursively do this again
@@ -245,6 +245,7 @@ class StartupGame extends React.Component {
       teams: [],
       workers: [],
       skills: [],
+      multiplier: 1,
     }, () => {
       // Clear the save
       this.saveManager.clear();
@@ -268,7 +269,11 @@ class StartupGame extends React.Component {
     // Add the skill to the list of skills
     var skills = this.state.skills;
 
-    this.state.multiplier += skill.multiplier;
+    // Update the multiplier if this skill has one
+    var multiplier = this.state.multiplier;
+    if (skill.multiplier) {
+      multiplier += skill.multiplier;
+    }
 
     // Pay for the skill
     views -= cost;
@@ -277,7 +282,7 @@ class StartupGame extends React.Component {
     skills.push(skill.id);
 
     // Update the changes in the state
-    this.setState({ skills, views });
+    this.setState({ skills, views, multiplier });
   }
 
   render () {
