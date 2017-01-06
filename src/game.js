@@ -151,8 +151,8 @@ class StartupGame extends React.Component {
 
   getWorkerViews (progress) {
     var sum = 0;
-    for (let [teamName, team] of Object.entries(this.state.teams)) {
-      sum += team.getRate() * progress;
+    for (let team of Object.keys(this.state.teams)) {
+      sum += this.state.teams[team].getRate() * progress;
     }
     return sum;
   }
@@ -181,11 +181,11 @@ class StartupGame extends React.Component {
     // Saves the game, probably way too often
     // Also constructs the list of workers to save
     var workers = [];
-    for (let [teamName, team] of Object.entries(this.state.teams)) {
-      for (let worker of team.workers) {
+    for (let team of Object.keys(this.state.teams)) {
+      for (let worker of this.state.teams[team].workers) {
         workers.push({
           name: worker.name,
-          team: teamName,
+          team: team,
         });
       }
     }
