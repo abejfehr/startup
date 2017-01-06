@@ -29,6 +29,10 @@ class SaveManager {
       }.bind(this), 0);
     });
   }
+
+  clear () {
+    localStorage.clear();
+  }
 }
 
 export default SaveManager;

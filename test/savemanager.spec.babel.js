@@ -27,6 +27,9 @@ beforeEach(() => {
         team: TeamType.GRAPHIC_DESIGN,
       },
     ],
+    skills: [
+      'html1', 'html2'
+    ]
   })));
 });
 
@@ -86,6 +89,9 @@ describe('the save manager', () => {
             team: TeamType.GRAPHIC_DESIGN,
           },
         ],
+        skills: [
+          'html1'
+        ]
       }).then(() => {
         // Check in local storage directly to see if the data is there
         expect(JSON.parse(atob(localStorage.getItem('saveData')))).to.have.property('views', 7);
@@ -93,7 +99,21 @@ describe('the save manager', () => {
         expect(JSON.parse(atob(localStorage.getItem('saveData')))).to.have.property('workers').with.length(1);
         expect(JSON.parse(atob(localStorage.getItem('saveData')))).to.have.deep.property('workers[0].name', 'Anna Kendrick Lamar');
         expect(JSON.parse(atob(localStorage.getItem('saveData')))).to.have.deep.property('workers[0].team', TeamType.GRAPHIC_DESIGN);
+        expect(JSON.parse(atob(localStorage.getItem('saveData')))).to.have.deep.property('skills[0]', 'html1');
       });
+    });
+  });
+
+  describe('clearing data', () => {
+    it('should have a method to clear the data', () => {
+      var saveManager = new SaveManager();
+      expect(saveManager.clear).to.not.be.undefined;
+    });
+
+    it('should clear all of the data in the localStorage', () => {
+      var saveManager = new SaveManager();
+      saveManager.clear();
+      expect(localStorage.getItem('saveData')).to.be.null;
     });
   });
 

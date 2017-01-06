@@ -106,6 +106,7 @@ class StartupGame extends React.Component {
         views: loadedData.views + 1,
         totalViews: loadedData.totalViews + 1,
         workers,
+        skills: loadedData.skills,
       });
       this.queuedViews = loadedData.queuedViews;
 
@@ -192,6 +193,7 @@ class StartupGame extends React.Component {
       queuedViews: this.queuedViews,
       totalViews,
       workers,
+      skills: this.state.skills,
     });
 
     // Recursively do this again
@@ -224,8 +226,44 @@ class StartupGame extends React.Component {
     this.setState({ workers, views });
   }
 
+  onReset () {
+    // Clear the save
+    this.saveManager.clear();
+
+    // Refresh the page
+    location.reload();
+  }
+
+  onSkillPurchased (skill) {
+    // Determine the cost
+    var cost = skill.cost;
+    var views = this.state.views;
+
+    // If we don't have enough, we can't obtain the skill
+    if (views < cost) { return; }
+
+    // If we already have the skill, don't re-add it
+    if (this.state.skills.find(el => el == skill.id)) { return; }
+
+    // Add the skill to the list of skills
+    var skills = this.state.skills;
+
+    // Pay for the skill
+    views -= cost;
+
+    // Add the skill to the list
+    skills.push(skill.id);
+
+    // Update the changes in the state
+    this.setState({ skills, views });
+  }
+
   render () {
-    return <Master {...this.state} onHire={this.onHire.bind(this)} />
+    return <Master
+      {...this.state}
+      onHire={this.onHire.bind(this)}
+      onReset={this.onReset.bind(this)}
+      onSkillPurchased={this.onSkillPurchased.bind(this)}/>
   }
 }
 

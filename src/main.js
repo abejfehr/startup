@@ -13,6 +13,15 @@ import StartupGame from './game';
 import './css/main.scss';
 
 /**
+ * If the user's browser supports service worker, we'll install one
+ */
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('serviceworker.js').catch(function(err) {
+    console.error('ServiceWorker registration failed: ', err);
+  });
+}
+
+/**
  * Let's get this party started!
  */
 document.addEventListener('DOMContentLoaded', function () {

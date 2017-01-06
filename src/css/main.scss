@@ -38,4 +38,8 @@ table.old-table th {
   border: 1px solid black;
 }
 
+.skills-title, .skill-title {
+  font-weight: bold;
+}
+
 @import 'skills/css/1.scss';

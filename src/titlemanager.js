@@ -6,7 +6,7 @@ class TitleManager {
   update (totalViews) {
     if (totalViews >= 100) {
       if (document.title.indexOf('startup') < 0) {
-        document.title = 'Your Startup';
+        document.title = 'Startup';
       }
     }
   }

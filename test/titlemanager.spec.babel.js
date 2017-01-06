@@ -26,7 +26,7 @@ describe('the title manager', () => {
       var titleManager = new TitleManager();
       expect(document.title).to.equal('Untitled');
       titleManager.update(100);
-      expect(document.title).to.equal('Your Startup');
+      expect(document.title).to.equal('Startup');
     });
   });
 });
