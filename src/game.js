@@ -228,6 +228,9 @@ class StartupGame extends React.Component {
   }
 
   onReset () {
+    // Make sure first
+    if (!window.confirm("Are you sure you'd like to reset?")) { return; }
+
     this.setState({
       views: 0,
       totalViews: 0, // Should match the views in the beginning
