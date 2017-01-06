@@ -118,6 +118,7 @@ class StartupGame extends React.Component {
         views: 1,
         totalViews: 1, // Should match the views in the beginning
         workers: [],
+        skills: [],
       });
       window.requestAnimationFrame(this.step.bind(this));
     }.bind(this));
@@ -227,11 +228,19 @@ class StartupGame extends React.Component {
   }
 
   onReset () {
-    // Clear the save
-    this.saveManager.clear();
+    this.setState({
+      views: 0,
+      totalViews: 0, // Should match the views in the beginning
+      teams: [],
+      workers: [],
+      skills: [],
+    }, () => {
+      // Clear the save
+      this.saveManager.clear();
 
-    // Refresh the page
-    location.reload();
+      // Refresh the page
+      location.reload();
+    });
   }
 
   onSkillPurchased (skill) {

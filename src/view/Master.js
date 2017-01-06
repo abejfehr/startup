@@ -1,5 +1,7 @@
 import React from 'react';
 
+import AdSense from 'react-adsense';
+
 import SkillBar from './components/SkillBar';
 import WorkersTable from './components/WorkersTable';
 
@@ -7,21 +9,19 @@ class Master extends React.Component {
 
   constructor (props) {
     super(props);
-
-    this.adInitialized = false;
   }
 
-  componentWillUpdate (nextProps, nextState) {
-    if (this.props.totalViews >= 100 && ! this.adInitialized) {
-      // Add the Google AdSense script
-      var google = document.createElement('script');
-      google.setAttribute('src', '//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js');
-      google.setAttribute('async', true);
-      document.head.appendChild(google);
-
+  componentWillUpdate () {
+    if (this.props.skills.find(el => el == 'monetize') && ! this.adInitialized) {
+  //     // Add the Google AdSense script
+  //     var google = document.createElement('script');
+  //     google.setAttribute('src', '//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js');
+  //     google.setAttribute('async', true);
+  //     document.head.appendChild(google);
+  //
       // Run the script that Google has in their snippet
       (window.adsbygoogle = window.adsbygoogle || []).push({});
-
+  //
       // Note that we already ran the script, so no need to run it again
       this.adInitialized = true;
     }
@@ -64,10 +64,20 @@ class Master extends React.Component {
                     Reset
                   </a>
                 </p>
-                <ins className="adsbygoogle"
-                     style={{ display: 'inline-block', width: '728px', height: '90px' }}
-                     data-ad-client="ca-pub-4885767461778395"
-                     data-ad-slot="4261754677"></ins>
+                { this.props.skills.find(el => el == 'monetize') ?
+                  <div style={{
+                    display: 'inline-block',
+                    width: '728px',
+                    height: '90px',
+                    border: '1px solid black',
+                    backgroundColor: '#aaa'
+                  }} /> :
+                  // <AdSense.Google
+                  //   client="ca-pub-4885767461778395"
+                  //   slot="4261754677"
+                  //   style={{ display: 'inline-block', width: '728px', height: '90px' }}
+                  //   format="" /> :
+                  <div />}
               </div> :
               <div />
             }
