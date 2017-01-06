@@ -81,6 +81,11 @@ class StartupGame extends React.Component {
        * A list of all of the skills that your company has
        */
       skills: [],
+
+      /**
+       * The modifier the changes the rate of all worker views
+       */
+      multiplier: 1,
     }
 
     // Start the game
@@ -110,6 +115,8 @@ class StartupGame extends React.Component {
       });
       this.queuedViews = loadedData.queuedViews;
 
+      this.multiplier = loadedData.multiplier;
+
       window.requestAnimationFrame(this.step.bind(this));
     }.bind(this))
     .catch(function () {
@@ -119,6 +126,7 @@ class StartupGame extends React.Component {
         totalViews: 1, // Should match the views in the beginning
         workers: [],
         skills: [],
+        multiplier: 1,
       });
       window.requestAnimationFrame(this.step.bind(this));
     }.bind(this));
@@ -166,7 +174,7 @@ class StartupGame extends React.Component {
     this.lastTimestamp = timestamp;
     this.ticks += progress;
 
-    this.queuedViews += this.getWorkerViews(progress);
+    this.queuedViews += this.getWorkerViews(progress) * this.state.multiplier;
 
     // Add the floor of the number of views to add
     var views = this.state.views + Math.floor(this.queuedViews);
@@ -259,6 +267,8 @@ class StartupGame extends React.Component {
 
     // Add the skill to the list of skills
     var skills = this.state.skills;
+
+    this.state.multiplier += skill.multiplier;
 
     // Pay for the skill
     views -= cost;

@@ -18,6 +18,9 @@ export default class Team {
    *   or the given level.
    *   @return {Number} _ - The rate of views expressed as a positive rational number
    *  @param {Array} workers - The list of workers in this group
+   *  @param {Function} cost
+   *   Calculates the rate that cost increases for the current level
+   *   or the given level.
    */
   constructor (team) {
     this.name = team.n;
