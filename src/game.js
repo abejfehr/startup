@@ -175,8 +175,8 @@ class StartupGame extends React.Component {
     this.queuedViews %= 1;
 
     // See if there's any reason to update the favicon or the title
-    this.titleManager.update(totalViews);
-    this.faviconManager.update(totalViews);
+    this.titleManager.update(this.state.skills);
+    this.faviconManager.update(this.state.skills);
 
     // Saves the game, probably way too often
     // Also constructs the list of workers to save

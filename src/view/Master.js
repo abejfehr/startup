@@ -43,6 +43,10 @@ class Master extends React.Component {
               </p> :
               <div />
             }
+            { this.props.skills.find(el => el == 'html2') && ! this.props.skills.find(el => el == 'startup') ?
+              <img src="assets/pikachu.gif" /> :
+              <div />
+            }
             { this.props.skills.find(el => el == 'startup') ?
               <WorkersTable
                 workers={this.props.workers}
