@@ -20,7 +20,7 @@ class WorkersTable extends React.Component {
       </tr>
     });
 
-    return <div>
+    return <div className="worker-table">
       <a href="javascript:void(0)" onClick={() => this.setState({visible: !this.state.visible})}>
         {
           this.state.visible ?

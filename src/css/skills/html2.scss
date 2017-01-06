@@ -1,0 +1,21 @@
+.website.html2 {
+  display: flex;
+  padding: 0;
+
+  .container {
+    width: 100%;
+    padding: 8px;
+  }
+
+  .skill-bar {
+    width: 200px;
+    background-color: white;
+    overflow-y: auto;
+  }
+
+  .worker-table {
+    width: 300px;
+    background-color: white;
+    overflow-y: auto;
+  }
+}

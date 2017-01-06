@@ -37,7 +37,7 @@ class SkillBar extends React.Component {
       }
     }, []);
 
-    return <div>
+    return <div className="skill-bar">
       <div className="skills-title">Skills</div>
       <div>
         {list.length ? list : "There are currently no skills available."}
