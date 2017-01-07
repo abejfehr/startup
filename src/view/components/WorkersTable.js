@@ -33,7 +33,7 @@ class WorkersTable extends React.Component {
         <table className="old-table">
           <thead>
             <tr>
-              <th colSpan="2">Graphic Designers</th>
+              <th colSpan="2">Graphic Designers ({workers.length})</th>
             </tr>
           </thead>
           <tbody>
