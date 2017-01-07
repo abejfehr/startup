@@ -1,5 +1,7 @@
 import React from 'react';
 
+import Modal from 'react-modal';
+
 import SkillBar from './components/SkillBar';
 import WorkersTable from './components/WorkersTable';
 
@@ -7,10 +9,49 @@ class Master extends React.Component {
 
   constructor (props) {
     super(props);
+
+    this.state = {
+      showModal: false,
+      shown: !this.props.skills.find(el => el == 'video' || el == 'social'),
+    };
+  }
+
+  componentWillMount() {
+    Modal.setAppElement('body');
+  }
+
+  componentWillUpdate () {
+    if (!this.state.shown && this.props.totalViews > 1000) {
+      this.setState({ showModal: true, shown: true });
+    }
   }
 
   render () {
     return <div className={"website " + this.props.skills.join(' ')}>
+            <Modal
+              style={{
+                content: {
+                  position: 'absolute',
+                  top: '150px',
+                  left: '150px',
+                  right: '150px',
+                  bottom: '150px',
+                }
+              }}
+              isOpen={this.state.showModal}
+              contentLabel="Minimal Modal Example">
+              <p>Inspirational message goes here.</p>
+              <div className="site-options">
+                <div className="site-option">
+                  <h2>Video Site</h2>
+                  <a href="javascript:void(0)" onClick={() => this.setState({ showModal: false }, () => this.props.onChoice('video'))}>Do this</a>
+                </div>
+                <div className="site-option">
+                  <h2>Social Media Site</h2>
+                  <a href="javascript:void(0)" onClick={() => this.setState({ showModal: false }, () => this.props.onChoice('social'))}>Do this</a>
+                </div>
+              </div>
+            </Modal>
             <SkillBar
               totalViews={this.props.totalViews}
               views={this.props.views}

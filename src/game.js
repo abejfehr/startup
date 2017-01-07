@@ -287,9 +287,17 @@ class StartupGame extends React.Component {
     this.setState({ skills, views, multiplier });
   }
 
+  onChoice (choice) {
+    this.onSkillPurchased({
+      id: choice,
+      cost: 0,
+    });
+  }
+
   render () {
     return <Master
       {...this.state}
+      onChoice={this.onChoice.bind(this)}
       onHire={this.onHire.bind(this)}
       onReset={this.onReset.bind(this)}
       onSkillPurchased={this.onSkillPurchased.bind(this)}/>

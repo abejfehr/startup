@@ -38,6 +38,15 @@ table.old-table th {
   border: 1px solid black;
 }
 
+.site-options {
+  display: flex;
+}
+
+.site-option {
+  border: 1px solid black;
+  flex: 1;
+}
+
 @import 'skills/html1.scss';
 @import 'skills/html2.scss';
 @import 'skills/css1.scss';
