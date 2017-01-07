@@ -6,7 +6,7 @@
  /* jshint esversion: 6 */
 
 import Chance from 'chance';
-import React from 'react';
+import { h, Component } from 'preact';
 
 import FaviconManager from './faviconmanager';
 import Master from './view/Master';
@@ -16,7 +16,7 @@ import TeamType from './teamtype';
 import TitleManager from './titlemanager';
 import Worker from './worker';
 
-class StartupGame extends React.Component {
+class StartupGame extends Component {
   constructor () {
     super();
 

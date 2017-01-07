@@ -1,9 +1,9 @@
-import React from 'react';
+import { h, Component } from 'preact';
 
 import skills from '../../skills';
 import SkillItem from './SkillItem';
 
-class SkillBar extends React.Component {
+class SkillBar extends Component {
 
   constructor (props) {
     super(props);

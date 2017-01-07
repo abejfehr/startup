@@ -1,11 +1,10 @@
-import React from 'react';
-
-import Modal from 'react-modal';
+import { h, Component } from 'preact';
 
 import SkillBar from './components/SkillBar';
 import WorkersTable from './components/WorkersTable';
+import Modal from './components/Modal';
 
-class Master extends React.Component {
+class Master extends Component {
 
   constructor (props) {
     super(props);
@@ -16,10 +15,6 @@ class Master extends React.Component {
     };
   }
 
-  componentWillMount() {
-    Modal.setAppElement('body');
-  }
-
   componentWillUpdate () {
     if (!this.state.shown && this.props.totalViews > 1000) {
       this.setState({ showModal: true, shown: true });
@@ -28,27 +23,16 @@ class Master extends React.Component {
 
   render () {
     return <div className={"website " + this.props.skills.join(' ')}>
-            <Modal
-              style={{
-                content: {
-                  position: 'absolute',
-                  top: '150px',
-                  left: '150px',
-                  right: '150px',
-                  bottom: '150px',
-                }
-              }}
-              isOpen={this.state.showModal}
-              contentLabel="Minimal Modal Example">
-              <p>Inspirational message goes here.</p>
+            <Modal visible={this.state.showModal}>
+              <p>Inspirational Message</p>
               <div className="site-options">
                 <div className="site-option">
-                  <h2>Video Site</h2>
-                  <a href="javascript:void(0)" onClick={() => this.setState({ showModal: false }, () => this.props.onChoice('video'))}>Do this</a>
+                  <h2>Video</h2>
+                  <a href="javascript:void(0)" onClick={() => this.setState({ shown: true, showModal: false }, () => this.props.onChoice('video'))}>Do this</a>
                 </div>
                 <div className="site-option">
-                  <h2>Social Media Site</h2>
-                  <a href="javascript:void(0)" onClick={() => this.setState({ showModal: false }, () => this.props.onChoice('social'))}>Do this</a>
+                  <h2>Social Media</h2>
+                  <a href="javascript:void(0)" onClick={() => this.setState({ shown: true, showModal: false }, () => this.props.onChoice('social'))}>Do this</a>
                 </div>
               </div>
             </Modal>
