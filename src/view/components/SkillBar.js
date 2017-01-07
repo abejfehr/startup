@@ -1,9 +1,9 @@
-import React from 'react';
+import { h, Component } from 'preact';
 
 import skills from '../../skills';
 import SkillItem from './SkillItem';
 
-class SkillBar extends React.Component {
+class SkillBar extends Component {
 
   constructor (props) {
     super(props);
@@ -38,7 +38,7 @@ class SkillBar extends React.Component {
     }, []);
 
     return <div className="skill-bar">
-      <div className="skills-title">Skills</div>
+      <h2 className="skills-title">Skills</h2>
       <div>
         {list.length ? list : "There are currently no skills available."}
       </div>

@@ -1,8 +1,8 @@
-import React from 'react';
+import { h, Component } from 'preact';
 
 import TeamTypes from '../../teamtype';
 
-class WorkersTable extends React.Component {
+class WorkersTable extends Component {
 
   constructor (props) {
     super(props);

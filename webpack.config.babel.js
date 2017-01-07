@@ -20,14 +20,14 @@ module.exports = {
 			},
  			{
 				test: /\.jpg$/,
-				loader: 'url?limit=1024'
+				loader: 'url?limit=1024',
 		  },
  			{
 				test: /\.jsx?$/,
-				exclude: '/node_modules/',
+				exclude: ['/node_modules/'],
 				loader: 'babel',
 				include: __dirname,
-			}
+			},
 		],
-	}
+	},
 };

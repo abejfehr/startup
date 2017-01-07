@@ -1,16 +1,41 @@
-import React from 'react';
+import { h, Component } from 'preact';
 
 import SkillBar from './components/SkillBar';
 import WorkersTable from './components/WorkersTable';
+import Modal from './components/Modal';
 
-class Master extends React.Component {
+class Master extends Component {
 
   constructor (props) {
     super(props);
+
+    this.state = {
+      showModal: false,
+      shown: !this.props.skills.find(el => el == 'video' || el == 'social'),
+    };
+  }
+
+  componentWillUpdate () {
+    if (!this.state.shown && this.props.totalViews > 1000) {
+      this.setState({ showModal: true, shown: true });
+    }
   }
 
   render () {
     return <div className={"website " + this.props.skills.join(' ')}>
+            <Modal visible={this.state.showModal}>
+              <p>Inspirational Message</p>
+              <div className="site-options">
+                <div className="site-option">
+                  <h2>Video</h2>
+                  <a href="javascript:void(0)" onClick={() => this.setState({ shown: true, showModal: false }, () => this.props.onChoice('video'))}>Do this</a>
+                </div>
+                <div className="site-option">
+                  <h2>Social Media</h2>
+                  <a href="javascript:void(0)" onClick={() => this.setState({ shown: true, showModal: false }, () => this.props.onChoice('social'))}>Do this</a>
+                </div>
+              </div>
+            </Modal>
             <SkillBar
               totalViews={this.props.totalViews}
               views={this.props.views}
