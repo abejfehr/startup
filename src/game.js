@@ -140,6 +140,21 @@ class StartupGame extends Component {
   }
 
   /**
+   * Removes the given worker from the given team.
+   */
+  removeWorkerFromTeam (team, worker) {
+    var teams = this.state.teams;
+    var workerList = teams[team].workers;
+    workerList.splice(
+      workerList.indexOf(
+        workerList.find(el => el.id === worker.id)
+      ), 1
+    );
+
+    this.setState({ teams });
+  }
+
+  /**
    * Creates all the workers and updates the state.
    */
   initTeams () {
@@ -287,9 +302,18 @@ class StartupGame extends Component {
     this.setState({ skills, views, multiplier });
   }
 
-  onFire (id) {
-    console.log("Fired.");
-    console.log("ID: " + id);
+  onFire (team, id) {
+    var workers = this.state.workers;
+
+    this.removeWorkerFromTeam(team, workers.find(el => el.id === id));
+
+    workers.splice(
+      workers.indexOf(
+        workers.find(el => el.id === id)
+      ), 1
+    );
+
+    this.setState({ workers });
   }
 
   onChoice (choice) {
