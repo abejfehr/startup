@@ -27,9 +27,14 @@ class Master extends React.Component {
                 <div />
               }
               { this.props.totalViews > 0 ?
-                <p>
-                  This page has been viewed {this.props.views} time{this.props.views !== 1 ? 's' : ''}.
-                </p> :
+                <div>
+                  <p>
+                    This page has been viewed {this.props.views} time{this.props.views !== 1 ? 's' : ''}.
+                  </p>
+                  <p>
+                    You are earning {this.props.viewsPerSecond.toFixed(1)} view{this.props.viewsPerSecond !== 1 ? 's' : ''} per second.
+                  </p>
+                </div> :
                 <div />
               }
               { this.props.skills.find(el => el == 'html2') && ! this.props.skills.find(el => el == 'startup') ?

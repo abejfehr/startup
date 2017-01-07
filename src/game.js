@@ -39,13 +39,6 @@ class StartupGame extends React.Component {
     this.ticks = 0;
 
     /**
-    * The number of views to add every minute of the game. 6 is totally
-    * arbitrary, it should really be calculated dynamically each step from
-    * powerups or whatever the user has
-    */
-    this.viewsPerMinute = 0;
-
-    /**
      * Creates a SaveManager that can be used for this game
      */
     this.saveManager = new SaveManager();
@@ -86,6 +79,11 @@ class StartupGame extends React.Component {
        * The modifier the changes the rate of all worker views
        */
       multiplier: 1,
+
+      /**
+       * The number of views you automatically earn each second
+       */
+       viewsPerSecond: 0,
     }
 
     // Start the game
@@ -126,6 +124,7 @@ class StartupGame extends React.Component {
         workers: [],
         skills: [],
         multiplier: 1,
+        viewsPerSecond: 0,
       });
       window.requestAnimationFrame(this.step.bind(this));
     }.bind(this));
@@ -175,10 +174,13 @@ class StartupGame extends React.Component {
 
     this.queuedViews += this.getWorkerViews(progress) * this.state.multiplier;
 
+    // Calculate the total number of views per second
+    var viewsPerSecond = this.getWorkerViews(1 / 60) * this.state.multiplier;
+
     // Add the floor of the number of views to add
     var views = this.state.views + Math.floor(this.queuedViews);
     var totalViews = this.state.totalViews + Math.floor(this.queuedViews);
-    this.setState({ views, totalViews });
+    this.setState({ views, totalViews, viewsPerSecond });
     this.queuedViews %= 1;
 
     // See if there's any reason to update the favicon or the title
