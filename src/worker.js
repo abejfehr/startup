@@ -13,6 +13,10 @@ export default class Worker {
    */
   constructor (n, time) {
     /**
+     * The unique identifier for the worker
+     */
+    this.id = W_COUNTER++;
+    /**
      * The name of the worker
      */
     this.name = n;
@@ -22,3 +26,5 @@ export default class Worker {
     this.dateHired = time;
   }
 }
+
+var W_COUNTER = 0;

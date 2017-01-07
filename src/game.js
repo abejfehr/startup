@@ -287,8 +287,9 @@ class StartupGame extends Component {
     this.setState({ skills, views, multiplier });
   }
 
-  onFire () {
+  onFire (id) {
     console.log("Fired.");
+    console.log("ID: " + id);
   }
 
   onChoice (choice) {
