@@ -31,9 +31,12 @@ class Master extends React.Component {
                   <p>
                     This page has been viewed {this.props.views} time{this.props.views !== 1 ? 's' : ''}.
                   </p>
-                  <p>
-                    You are earning {this.props.viewsPerSecond.toFixed(1)} view{this.props.viewsPerSecond !== 1 ? 's' : ''} per second.
-                  </p>
+                  { this.props.viewsPerSecond > 0 ?
+                    <p>
+                      You are earning {this.props.viewsPerSecond.toFixed(1)} view{this.props.viewsPerSecond !== 1 ? 's' : ''} per second.
+                    </p> :
+                    <div />
+                  }
                 </div> :
                 <div />
               }
