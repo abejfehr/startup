@@ -8,7 +8,7 @@ class WorkersTable extends React.Component {
     super(props);
 
     this.state = {
-      visible: false,
+      visible: true,
     }
   }
 

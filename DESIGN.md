@@ -148,9 +148,12 @@ Results:
 
 > hire a back end developer
 
-### Get a slogan
+### Get a corporate motto
 
 You've decdied on "Don't be greedy"
+
+Team: None
+Cost: ?
 
 ### Learn PHP
 
