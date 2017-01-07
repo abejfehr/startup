@@ -40,7 +40,8 @@ class Master extends Component {
               <WorkersTable
                 workers={this.props.workers}
                 teams={this.props.teams}
-                onHire={this.props.onHire} /> :
+                onHire={this.props.onHire}
+                onFire={this.props.onFire} /> :
               <div />
             }
             </div>

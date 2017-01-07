@@ -287,6 +287,11 @@ class StartupGame extends Component {
     this.setState({ skills, views, multiplier });
   }
 
+  onFire (id) {
+    console.log("Fired.");
+    console.log("ID: " + id);
+  }
+
   onChoice (choice) {
     this.onSkillPurchased({
       id: choice,
@@ -299,6 +304,7 @@ class StartupGame extends Component {
       {...this.state}
       onChoice={this.onChoice.bind(this)}
       onHire={this.onHire.bind(this)}
+      onFire={this.onFire.bind(this)}
       onReset={this.onReset.bind(this)}
       onSkillPurchased={this.onSkillPurchased.bind(this)}/>
   }
