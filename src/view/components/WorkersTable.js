@@ -16,7 +16,7 @@ class WorkersTable extends React.Component {
     var workers = this.props.workers.map((worker) => {
       return <tr key={worker.name}>
         <td>{worker.name}</td>
-        <td><a href="javascript:void(0)">fire</a></td>
+        <td><a href="javascript:void(0)" onClick={() => this.props.onFire()}>fire</a></td>
       </tr>
     });
 

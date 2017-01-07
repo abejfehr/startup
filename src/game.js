@@ -287,10 +287,15 @@ class StartupGame extends React.Component {
     this.setState({ skills, views, multiplier });
   }
 
+  onFire () {
+    console.log("Fired.");
+  }
+
   render () {
     return <Master
       {...this.state}
       onHire={this.onHire.bind(this)}
+      onFire={this.onFire.bind(this)}
       onReset={this.onReset.bind(this)}
       onSkillPurchased={this.onSkillPurchased.bind(this)}/>
   }
