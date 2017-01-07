@@ -3598,10 +3598,6 @@ rc@~1.1.6:
     minimist "^1.2.0"
     strip-json-comments "~1.0.4"
 
-react-adsense:
-  version "0.0.1"
-  resolved "https://registry.yarnpkg.com/react-adsense/-/react-adsense-0.0.1.tgz#becfef31b583ffc9f806b6a0568ac530df99cfe7"
-
 react-deep-force-update@^1.0.0:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/react-deep-force-update/-/react-deep-force-update-1.0.1.tgz#f911b5be1d2a6fe387507dd6e9a767aa2924b4c7"
