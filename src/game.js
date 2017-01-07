@@ -39,13 +39,6 @@ class StartupGame extends React.Component {
     this.ticks = 0;
 
     /**
-    * The number of views to add every minute of the game. 6 is totally
-    * arbitrary, it should really be calculated dynamically each step from
-    * powerups or whatever the user has
-    */
-    this.viewsPerMinute = 0;
-
-    /**
      * Creates a SaveManager that can be used for this game
      */
     this.saveManager = new SaveManager();
@@ -86,6 +79,11 @@ class StartupGame extends React.Component {
        * The modifier the changes the rate of all worker views
        */
       multiplier: 1,
+
+      /**
+       * The number of views you automatically earn each second
+       */
+       viewsPerSecond: 0,
     }
 
     // Start the game
@@ -112,10 +110,9 @@ class StartupGame extends React.Component {
         totalViews: loadedData.totalViews + 1,
         workers,
         skills: loadedData.skills,
+        multiplier: loadedData.multiplier,
       });
       this.queuedViews = loadedData.queuedViews;
-
-      this.multiplier = loadedData.multiplier;
 
       window.requestAnimationFrame(this.step.bind(this));
     }.bind(this))
@@ -127,6 +124,7 @@ class StartupGame extends React.Component {
         workers: [],
         skills: [],
         multiplier: 1,
+        viewsPerSecond: 0,
       });
       window.requestAnimationFrame(this.step.bind(this));
     }.bind(this));
@@ -176,10 +174,13 @@ class StartupGame extends React.Component {
 
     this.queuedViews += this.getWorkerViews(progress) * this.state.multiplier;
 
+    // Calculate the total number of views per second
+    var viewsPerSecond = this.getWorkerViews(1 / 60) * this.state.multiplier;
+
     // Add the floor of the number of views to add
     var views = this.state.views + Math.floor(this.queuedViews);
     var totalViews = this.state.totalViews + Math.floor(this.queuedViews);
-    this.setState({ views, totalViews });
+    this.setState({ views, totalViews, viewsPerSecond });
     this.queuedViews %= 1;
 
     // See if there's any reason to update the favicon or the title
@@ -203,6 +204,7 @@ class StartupGame extends React.Component {
       totalViews,
       workers,
       skills: this.state.skills,
+      multiplier: this.state.multiplier,
     });
 
     // Recursively do this again
@@ -245,6 +247,7 @@ class StartupGame extends React.Component {
       teams: [],
       workers: [],
       skills: [],
+      multiplier: 1,
     }, () => {
       // Clear the save
       this.saveManager.clear();
@@ -268,7 +271,11 @@ class StartupGame extends React.Component {
     // Add the skill to the list of skills
     var skills = this.state.skills;
 
-    this.state.multiplier += skill.multiplier;
+    // Update the multiplier if this skill has one
+    var multiplier = this.state.multiplier;
+    if (skill.multiplier) {
+      multiplier += skill.multiplier;
+    }
 
     // Pay for the skill
     views -= cost;
@@ -277,7 +284,7 @@ class StartupGame extends React.Component {
     skills.push(skill.id);
 
     // Update the changes in the state
-    this.setState({ skills, views });
+    this.setState({ skills, views, multiplier });
   }
 
   render () {

@@ -17,5 +17,9 @@
     width: 300px;
     background-color: white;
     overflow-y: auto;
+
+    &.hidden {
+      width: 10px;
+    }
   }
 }

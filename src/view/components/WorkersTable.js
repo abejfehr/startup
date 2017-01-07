@@ -8,7 +8,7 @@ class WorkersTable extends React.Component {
     super(props);
 
     this.state = {
-      visible: false,
+      visible: true,
     }
   }
 
@@ -20,34 +20,31 @@ class WorkersTable extends React.Component {
       </tr>
     });
 
-    return <div className="worker-table">
-      <a href="javascript:void(0)" onClick={() => this.setState({visible: !this.state.visible})}>
-        {
-          this.state.visible ?
-          "Hide Employees" :
-          "Manage Employees"
-        }
-      </a>
-      {
-        this.state.visible ?
-        <table className="old-table">
-          <thead>
-            <tr>
-              <th colSpan="2">Graphic Designers ({workers.length})</th>
-            </tr>
-          </thead>
-          <tbody>
-            {workers}
-            <tr>
-              <td colSpan="2">
-                <a href="javascript:void(0)" onClick={() => this.props.onHire(TeamTypes.GRAPHIC_DESIGN)}>
-                  Hire New Graphic Designer ({this.props.teams[TeamTypes.GRAPHIC_DESIGN].getCost()} views)
-                </a>
-              </td>
-            </tr>
-          </tbody>
-        </table> :
-        <div />
+    return <div className={"worker-table " + ( this.state.visible ? "" : "hidden" )}>
+      { this.state.visible ?
+        <div>
+          <div><a href="javascript:void(0)" onClick={() => this.setState({visible: false})}>Hide Employees</a></div>
+          <table className="old-table">
+            <thead>
+              <tr>
+                <th colSpan="2">Graphic Designers</th>
+              </tr>
+            </thead>
+            <tbody>
+              {workers}
+              <tr>
+                <td colSpan="2">
+                  <a href="javascript:void(0)" onClick={() => this.props.onHire(TeamTypes.GRAPHIC_DESIGN)}>
+                    Hire New Graphic Designer ({this.props.teams[TeamTypes.GRAPHIC_DESIGN].getCost()} views)
+                  </a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div> :
+        <div className="show">
+          <a href="javascript:void(0)" onClick={() => this.setState({visible: true})}>&lt;</a>
+        </div>
       }
     </div>;
   }
