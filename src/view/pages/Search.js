@@ -17,32 +17,69 @@ class Search extends Component {
     });
   }
 
-  handleSearch () {
-    console.log("HI");
-    this.setState({
-      showResults: !!this.state.query,
-    });
+  handleSearch (e) {
+    // If the query was empty, return right aways
+    if (!this.state.query) { return; }
+
+    var oldCursor = e.target.style.cursor;
+
+    // Don't do this twice
+    if (oldCursor == 'wait') { return; }
+
+    // Start "loading"
+    document.body.style.cursor = 'wait';
+    e.target.style.cursor = 'wait';
+
+
+    setTimeout(
+      () => {
+        this.setState({
+          showResults: !!this.state.query,
+        });
+        document.body.style.cursor = 'default';
+        e.target.style.cursor = oldCursor;
+      }, 300
+    )
   }
 
-  handleGoBack () {
-    this.setState({
-      showResults: false,
-    });
+  handleGoBack (e) {
+    var oldCursor = e.target.style.cursor;
+
+    // Don't do this twice
+    if (oldCursor == 'wait') { return; }
+
+    document.body.style.cursor = 'wait';
+    e.target.style.cursor = 'wait';
+
+
+    setTimeout(
+      () => {
+        this.setState({
+          showResults: false,
+        });
+        document.body.style.cursor = 'default';
+        e.target.style.cursor = oldCursor;
+      }, 300
+    )
   }
 
   render () {
     var results = [{
-      title: "Startup with high chance of failure announced",
-      url: "http://someurl.com/",
-      description: "Recent startup announced with high chance of failure.",
+      title: "Angel Investors Back New Search 'Startup' | Blümberg News",
+      url: "http://www.blümberg.com/angel-investors-back-search-startup",
+      description: "Terms of investment unknown, but analysts are dubious about startup's success. Too many other companies have tried and failed in...",
     }, {
-      title: "Startup with high chance of failure announced",
-      url: "http://someurl.com/",
-      description: "Recent startup announced with high chance of failure.",
+      title: "98% of All Startups Fail - CrackerNews",
+      url: "http://www.crackernews.com/98-of-all-startups-fail",
+      description: "A recent study suggests that very few startup companies ever become profitable.",
     }, {
-      title: "Startup with high chance of failure announced",
-      url: "http://someurl.com/",
-      description: "Recent startup announced with high chance of failure.",
+      title: "'Startup' on BookFace",
+      url: "http://www.bookface.com/pages/startup",
+      description: "Sign in to 'love' Startup, the newest in search innovation.",
+    }, {
+      title: "UFO-detecting Startup Rises through the Ranks",
+      url: "http://www.conspiracytheoristdaily.com/?p=ufo-detecting-startup-r",
+      description: "A new startup claims to use the newest in radar technology to detect UFOs. The business plan is genius, revenue streams are from...",
     }].map(function (result) {
       return <div className="result">
         <div className="result-title">

@@ -83,14 +83,13 @@ table.old-table th {
 
 .modal {
   position: absolute;
-  top: 200px;
-  bottom: 200px;
-  left: 200px;
-  right: 200px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   background-color: white;
   border-radius: 15px;
   box-shadow: 0px 2px 15px #888888;
-  padding: 10px;
+  padding: 20px;
   font-family: sans-serif;
   text-align: center;
 }
@@ -126,24 +125,6 @@ table.old-table th {
     background-color: #eee;
     cursor: pointer;
   }
-}
-
-.skill-bar-item {
-    text-decoration: none;
-    position: relative;
-}
-.skill-bar-item .skill-description-tooltip {
-    display: none;
-}
-.skill-bar-item:hover .skill-description-tooltip {
-    display: block;
-    position: fixed;
-    overflow: hidden;
-    width: 200px;
-    padding: 10px;
-    z-index: 99;
-    background-color: white;
-    border: 1px solid gray;
 }
 
 @import 'skills/html1.scss';

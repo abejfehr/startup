@@ -236,7 +236,7 @@ class StartupGame extends Component {
     });
 
     // Manage the tooltips
-    this.tooltips = document.querySelectorAll('.skill-description-tooltip');
+    this.tooltips = document.querySelectorAll('.css1 .skill-description-tooltip');
     // debugger;
 
     // Recursively do this again

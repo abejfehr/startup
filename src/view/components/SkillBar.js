@@ -40,7 +40,10 @@ class SkillBar extends Component {
     return <div className="skill-bar">
       <h2 className="skill-bar-title">Skills</h2>
       <div>
-        {list.length ? list : "There are currently no skills available."}
+        { list.length ?
+          list :
+          <div className="no-skills">There are currently no skills available.</div>
+        }
       </div>
     </div>;
   }

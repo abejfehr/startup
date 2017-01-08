@@ -3,6 +3,12 @@
   background-color: white;
   background-image: none;
 
+  @keyframes slow {
+      0%   { opacity: 0; }
+      99%  { opacity: 0; }
+      100% { opacity: 1; }
+  }
+
   .container {
     padding: 0;
 
@@ -13,6 +19,8 @@
 
       h1 {
         font-size: 64px;
+        animation-name: slow;
+        animation-duration: 0.3s;
       }
 
       .main-search-page {
@@ -30,6 +38,12 @@
           h2 {
             display: inline;
             font-size: 48px;
+            animation-name: slow;
+            animation-duration: 0.3s;
+
+            &:hover {
+              cursor: pointer;
+            }
           }
         }
 
@@ -81,9 +95,10 @@
 
       input {
         width: 500px;
-        height: 35px;
+        height: 15px;
         font-size: 14px;
         margin: 10px;
+        padding: 10px;
       }
 
       button {
