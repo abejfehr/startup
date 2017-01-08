@@ -3,7 +3,67 @@
   background-color: white;
   background-image: none;
 
-  .search-page {
+  .container {
+    padding: 0;
+
+    .search-page {
+      text-align: center;
+      position: relative;
+      min-height: 100%;
+      padding-top: 100px;
+
+      h1 {
+        font-weight: 100;
+        font-size: 64px;
+        font-family: serif;
+        margin-bottom: 10px;
+        letter-spacing: 2px;
+
+        .letter-1 {
+          color: #c92d39;
+        }
+        .letter-2 {
+          color: #ef8d22;
+        }
+        .letter-3 {
+          color: #fcc438;
+        }
+        .letter-4 {
+          color: #7ab648;
+        }
+        .letter-5 {
+          color: #19967d;
+        }
+        .letter-6 {
+          color: #3aa6dd;
+        }
+        .letter-7 {
+          color: #0c7cba;
+        }
+      }
+
+      input {
+        width: 500px;
+        height: 35px;
+        font-size: 14px;
+        margin: 10px;
+      }
+
+      button {
+        width: 100px;
+        height: 35px;
+        border-radius: none;
+        font-size: 14px;
+      }
+    }
+  }
+
+  .footer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    font-size: 12px;
   }
 
 }
