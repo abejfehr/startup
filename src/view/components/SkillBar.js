@@ -30,7 +30,7 @@ class SkillBar extends Component {
         (!cur.team || (cur.team && props.teams[cur.team] && props.teams[cur.team].workers.length > 0)) && // Or if it's for a team and we don't have any members of that team yet
         (!cur.prerequisites || hasAllPrereqs(cur.prerequisites)) // And make sure the prerequisites are met
       ) {
-        var item = <SkillItem clickable={props.skills.find(el => el == 'css1')} skill={cur} key={i} onSkillPurchased={this.props.onSkillPurchased} />
+        var item = <SkillItem basic={!this.props.skills.find(el => el == 'html2')} clickable={props.skills.find(el => el == 'css1')} skill={cur} key={i} onSkillPurchased={this.props.onSkillPurchased} />
         return acc.concat(item);
       } else {
         return acc;
@@ -38,13 +38,20 @@ class SkillBar extends Component {
     }, []);
 
     return <div className="skill-bar">
-      <h2 className="skill-bar-title">Skills</h2>
+      { this.props.skills.find(el => el == 'html2') ?
+        <h2 className="skill-bar-title">Skills</h2> :
+        <div />
+      }
       <div>
         { list.length ?
           list :
           <div className="no-skills">There are currently no skills available.</div>
         }
       </div>
+      { this.props.skills.find(el => el == 'html2') ?
+        <div /> :
+        <br />
+      }
     </div>;
   }
 
