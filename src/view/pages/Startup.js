@@ -23,6 +23,8 @@ class Startup extends Component {
               <Modal visible={this.state.showModal}>
                 <h2>Make a choice.</h2>
                 <p>{`Congratulations! You've grown your startup to a sizeable company. It's time for you to make a choice about how you'd like to proceed.`}</p>
+                <br />
+                <p>What kind of company would you like to become?</p>
                 <div className="site-options">
                   <a className="site-option">
                     <span class="icon-social"></span>
