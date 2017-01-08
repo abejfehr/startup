@@ -27,8 +27,13 @@
 .icon-social:before {
   content: "\e903";
 }
+
 .icon-search:before {
   content: "\e902";
+}
+
+.icon-globe:before {
+  content: "\e900";
 }
 
 html, body {
@@ -127,3 +132,4 @@ table.old-table th {
 @import 'skills/html2.scss';
 @import 'skills/css1.scss';
 @import 'skills/search.scss';
+@import 'skills/social.scss';
