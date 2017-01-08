@@ -13,7 +13,7 @@ class Startup extends Component {
   }
 
   componentWillUpdate () {
-    if (!this.props.skills.find(el => el == 'search' || el == 'social') && this.props.totalViews > 100) {
+    if (!this.props.skills.find(el => el == 'search' || el == 'social') && this.props.totalViews > 500) {
       this.setState({ showModal: true });
     }
   }
@@ -21,16 +21,17 @@ class Startup extends Component {
   render () {
     return  <div>
               <Modal visible={this.state.showModal}>
-                <p>Inspirational Message</p>
+                <h2>Make a choice.</h2>
+                <p>{`Congratulations! You've grown your startup to a sizeable company. It's time for you to make a choice about how you'd like to proceed.`}</p>
                 <div className="site-options">
-                  <div className="site-option">
-                    <h2>Social Media</h2>
-                    <a href="javascript:void(0)" onClick={() => this.setState({ showModal: false }, () => this.props.onChoice('social'))}>Do this</a>
-                  </div>
-                  <div className="site-option">
-                    <h2>Search</h2>
-                    <a href="javascript:void(0)" onClick={() => this.setState({ showModal: false }, () => this.props.onChoice('search'))}>Do this</a>
-                  </div>
+                  <a className="site-option">
+                    <span class="icon-social"></span>
+                    <h3>Social Media</h3>
+                  </a>
+                  <a className="site-option">
+                    <span class="icon-search"></span>
+                    <h3>Search</h3>
+                  </a>
                 </div>
               </Modal>
             { this.props.skills.find(el => el == 'html2') ?
