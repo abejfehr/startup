@@ -1,8 +1,7 @@
-import { h, Component } from 'preact';
+import { h, render, Component } from 'preact';
 
 import SkillBar from './components/SkillBar';
 import WorkersTable from './components/WorkersTable';
-import Modal from './components/Modal';
 
 import Basic from './pages/Basic';
 import Search from './pages/Search';

@@ -1,4 +1,6 @@
-import { h, Component } from 'preact';
+import { h, render, Component } from 'preact';
+
+import Modal from '../components/Modal';
 
 class Startup extends Component {
 
@@ -9,7 +11,7 @@ class Startup extends Component {
       showModal: false,
     };
   }
-  
+
   componentWillUpdate () {
     if (!this.props.skills.find(el => el == 'search' || el == 'social') && this.props.totalViews > 100) {
       this.setState({ showModal: true });
