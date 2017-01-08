@@ -11,12 +11,14 @@
     width: 200px;
     background-color: white;
     overflow-y: auto;
+    flex: none;
   }
 
   .worker-table {
     width: 300px;
     background-color: white;
     overflow-y: auto;
+    flex: none;
 
     &.hidden {
       width: 10px;
