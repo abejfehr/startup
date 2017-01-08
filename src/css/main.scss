@@ -128,6 +128,24 @@ table.old-table th {
   }
 }
 
+.skill-bar-item {
+    text-decoration: none;
+    position: relative;
+}
+.skill-bar-item .skill-description-tooltip {
+    display: none;
+}
+.skill-bar-item:hover .skill-description-tooltip {
+    display: block;
+    position: fixed;
+    overflow: hidden;
+    width: 200px;
+    padding: 10px;
+    z-index: 99;
+    background-color: white;
+    border: 1px solid gray;
+}
+
 @import 'skills/html1.scss';
 @import 'skills/html2.scss';
 @import 'skills/css1.scss';

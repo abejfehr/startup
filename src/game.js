@@ -49,6 +49,8 @@ class StartupGame extends Component {
     this.faviconManager = new FaviconManager();
     this.titleManager = new TitleManager();
 
+    this.tooltips = [];
+
     this.state = {
       /**
        * Total number of views since the beginning of the game
@@ -128,6 +130,17 @@ class StartupGame extends Component {
       });
       window.requestAnimationFrame(this.step.bind(this));
     }.bind(this));
+
+    // Make a mousemove listener
+    window.onmousemove = function(e) {
+      var x = `${e.clientX + 20}px`,
+          y = `${e.clientY + 20}px`;
+      for (let i = 0; i < this.tooltips.length; ++i) {
+        this.tooltips[i].style.top = y;
+        this.tooltips[i].style.left = x;
+      }
+    }.bind(this);
+
   }
 
   /**
@@ -221,6 +234,10 @@ class StartupGame extends Component {
       skills: this.state.skills,
       multiplier: this.state.multiplier,
     });
+
+    // Manage the tooltips
+    this.tooltips = document.querySelectorAll('.skill-description-tooltip');
+    // debugger;
 
     // Recursively do this again
     window.requestAnimationFrame(this.step.bind(this));

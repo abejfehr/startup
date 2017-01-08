@@ -38,7 +38,7 @@ class SkillBar extends Component {
     }, []);
 
     return <div className="skill-bar">
-      <h2 className="skills-title">Skills</h2>
+      <h2 className="skill-bar-title">Skills</h2>
       <div>
         {list.length ? list : "There are currently no skills available."}
       </div>
