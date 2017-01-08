@@ -37,6 +37,7 @@ class Master extends Component {
             </div>
             { this.props.skills.find(el => el == 'startup') ?
               <WorkersTable
+                icon={this.props.skills.find(el => el == 'css1')}
                 workers={this.props.workers}
                 teams={this.props.teams}
                 onHire={this.props.onHire}

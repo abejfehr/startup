@@ -38,7 +38,7 @@ class Search extends Component {
         });
         document.body.style.cursor = 'default';
         e.target.style.cursor = oldCursor;
-      }, 300
+      }, this.props.skills.find(el => el == 'php') ? 300 : 500
     )
   }
 
@@ -56,10 +56,11 @@ class Search extends Component {
       () => {
         this.setState({
           showResults: false,
+          query: '',
         });
         document.body.style.cursor = 'default';
         e.target.style.cursor = oldCursor;
-      }, 300
+      }, this.props.skills.find(el => el == 'php') ? 300 : 500
     )
   }
 
