@@ -26,11 +26,11 @@ class Startup extends Component {
                 <br />
                 <p>What kind of company would you like to become?</p>
                 <div className="site-options">
-                  <a className="site-option">
+                  <a onClick={() => this.props.onChoice('social')} className="site-option">
                     <span class="icon-social"></span>
                     <h3>Social Media</h3>
                   </a>
-                  <a className="site-option">
+                  <a onClick={() => this.props.onChoice('search')} className="site-option">
                     <span class="icon-search"></span>
                     <h3>Search</h3>
                   </a>
