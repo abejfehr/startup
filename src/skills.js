@@ -117,7 +117,7 @@ var skills = [
     description: "In order to increase revenue, you need to start selling software using a subscription pricing model",
     cost: 3000,
     trigger: 3000,
-    multiplier: 0.01,
+    multiplier: 0.05,
   },
   {
     id: "cto",
@@ -125,7 +125,7 @@ var skills = [
     description: "There are just too many technologies for you to keep track of! You need a CTO so you can focus on the business aspect of your startup.",
     cost: 5000,
     trigger: 3000,
-    multiplier: 0.01,
+    multiplier: 0.05,
   },
   {
     id: "cfo",
@@ -133,15 +133,7 @@ var skills = [
     description: "You're making money (and spending it) faster that you can think. You need to hire a CFO to keep your finances under control.",
     cost: 5000,
     trigger: 3000,
-    multiplier: 0.01,
-  },
-  {
-    id: "acquired",
-    name: "Get acquired by Boogle",
-    description: "You've done it, you've lived the new American dream. Your website is somehow so popular and innovative that search giant Boogle thought it would make an excellent addition to their portfolio of crazy projects.",
-    cost: 5000,
-    trigger: 3000,
-    multiplier: 0.01,
+    multiplier: 0.3,
   },
   {
     id: "ipo",
@@ -149,7 +141,7 @@ var skills = [
     description: `Congratulations! You now have the opportunity to go public on the stock market. Your IPO is supposedly one of the biggest in ${(new Date()).getFullYear()}.`,
     cost: 5000,
     trigger: 3000,
-    multiplier: 0.01,
+    multiplier: 0.2,
   },
   {
     id: "book",
@@ -157,15 +149,7 @@ var skills = [
     description: "You've created an empire, and people want to hear your story. You write a book to tell it, and promote Startup while you're at it.",
     cost: 8000,
     trigger: 5000,
-    multiplier: 0.01,
-  },
-  {
-    id: "acquire",
-    name: "Acquire Boogle",
-    description: "",
-    cost: 50000,
-    trigger: 50000,
-    multiplier: 0.01,
+    multiplier: 0.1,
   },
 ];
 

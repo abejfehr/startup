@@ -2,6 +2,7 @@ import { h, render, Component } from 'preact';
 
 import SkillBar from './components/SkillBar';
 import WorkersTable from './components/WorkersTable';
+import Modal from './components/Modal';
 
 import Basic from './pages/Basic';
 import Search from './pages/Search';
@@ -12,6 +13,21 @@ class Master extends Component {
 
   constructor (props) {
     super(props);
+
+    debugger;
+    this.state = {
+      showAcquire: false,
+      showAcquired: false,
+    }
+  }
+
+  componentWillUpdate () {
+    if (!this.props.skills.find(el => el == 'acquired' || el == 'notacquired') && this.props.totalViews > 800) {
+      this.setState({ showAcquired: true, acquiredShown: true });
+    }
+    if (this.props.totalViews > 1000 && !this.props.skills.find(el => el == 'acquired')) {
+      this.setState({ showAcquire: true, acquireShown: true });
+    }
   }
 
   render () {
@@ -26,6 +42,19 @@ class Master extends Component {
     }
 
     return <div className={"website " + this.props.skills.join(' ')}>
+            <Modal visible={this.state.showAcquired}>
+              <h2>{"Congratulations!"}</h2>
+              <p>{`You've done it, you've lived the new American dream. Your website is somehow so popular and innovative that search giant Boogle thought it would make an excellent addition to their portfolio of crazy projects.`}</p>
+              <p>What would you like to do?</p>
+              <div>
+                <a href="javascript:void(0)" onClick={() => this.setState({ showAcquired: false }) && this.props.onSkillPurchased({ id: 'acquired', cost: 0 })}>Sell the company</a>
+                <a href="javascript:void(0)" onClick={() => this.setState({ showAcquired: false }) && this.props.onSkillPurchased({ id: 'notacquired', cost: 0})}>Keep the company</a>
+              </div>
+            </Modal>
+            <Modal visible={this.state.showAcquire}>
+              <h2>{"You've acquired Boogle."}</h2>
+              <p>Wow. Your company is SO big, that you acquired search giant Boogle. Your organization has offices all across the globe and now accounts for almost half of all internet activity. There is nothing left to do at this point, and no more room to grow. Great work.</p>
+            </Modal>
             <SkillBar
               totalViews={this.props.totalViews}
               views={this.props.views}

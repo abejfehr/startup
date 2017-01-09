@@ -290,6 +290,7 @@ class StartupGame extends Component {
   }
 
   onSkillPurchased (skill) {
+    debugger;
     // Determine the cost
     var cost = skill.cost;
     var views = this.state.views;
