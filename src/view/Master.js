@@ -14,7 +14,6 @@ class Master extends Component {
   constructor (props) {
     super(props);
 
-    debugger;
     this.state = {
       showAcquire: false,
       showAcquired: false,
@@ -54,6 +53,7 @@ class Master extends Component {
             <Modal visible={this.state.showAcquire}>
               <h2>{"You've acquired Boogle."}</h2>
               <p>Wow. Your company is SO big, that you acquired search giant Boogle. Your organization has offices all across the globe and now accounts for almost half of all internet activity. There is nothing left to do at this point, and no more room to grow. Great work.</p>
+              <a href="javascript:void(0)" onClick={() => this.props.onReset()}>Do it all over again</a>
             </Modal>
             <SkillBar
               totalViews={this.props.totalViews}

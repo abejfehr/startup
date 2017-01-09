@@ -237,7 +237,6 @@ class StartupGame extends Component {
 
     // Manage the tooltips
     this.tooltips = document.querySelectorAll('.css1 .skill-description-tooltip');
-    // debugger;
 
     // Recursively do this again
     window.requestAnimationFrame(this.step.bind(this));
@@ -290,7 +289,6 @@ class StartupGame extends Component {
   }
 
   onSkillPurchased (skill) {
-    debugger;
     // Determine the cost
     var cost = skill.cost;
     var views = this.state.views;
