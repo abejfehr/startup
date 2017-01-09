@@ -1,4 +1,4 @@
-import TeamType from './teamtype';
+import TeamTypes from './teamtype';
 
 var skills = [
   {
@@ -28,64 +28,64 @@ var skills = [
     id: "css1",
     name: "Learn CSS",
     description: "Your new Graphic Design team needs to know some CSS in order to make the website look a little better.",
-    team: TeamType.GRAPHIC_DESIGN,
+    team: TeamTypes.GRAPHIC_DESIGN,
     cost: 25,
     trigger: 10,
-    multiplier: 0.05,
+    multiplier: {team: TeamTypes.GRAPHIC_DESIGN, multiplier: 0.10},
   },
   {
     id: "favicon",
     name: "What's a favicon?",
     description: "A buddy was adding your website to favourites when he realized your page didn't have an actual icon. He tells you what a favicon is and how to set it up, but you just keep it simple for now.",
-    team: TeamType.GRAPHIC_DESIGN,
+    team: TeamTypes.GRAPHIC_DESIGN,
     cost: 25,
     trigger: 10,
-    multiplier: 0.02,
+    multiplier: {team: TeamTypes.GRAPHIC_DESIGN, multiplier: 0.02},
   },
   {
     id: "fireworks",
     name: "Learn Macromedia Fireworks",
     description: "Your Graphic Design team needs some software to design your site. You obtain a copy of Macromedia Fireworks for them to do the mockups in and they take the site to the next level.",
-    team: TeamType.GRAPHIC_DESIGN,
+    team: TeamTypes.GRAPHIC_DESIGN,
     cost: 35,
     trigger: 30,
-    multiplier: 0.03,
+    multiplier: {team: TeamTypes.GRAPHIC_DESIGN, multiplier: 0.03}
   },
   {
     id: "monetize",
     name: "Monetize with ads",
     description: "You're getting views, but your wallet is getting emptier because of server costs...running a startup is harder than your thought.",
-    team: TeamType.GRAPHIC_DESIGN,
+    team: TeamTypes.GRAPHIC_DESIGN,
     cost: 55,
     trigger: 45,
-    multiplier: 0.05,
+    multiplier: {team: TeamTypes.GRAPHIC_DESIGN, multiplier: 0.05},
   },
   {
     id: "javascript",
     name: "Learn JavaScript",
     description: "You recently heard about DHTML, and decided that you should step up your game and pay for the front end developers to learn some JavaScript so they can make collapsable menus.",
-    team: TeamType.FRONT_END_DEVELOPERS,
+    team: TeamTypes.FRONT_END_DEVELOPERS,
     cost: 55,
     trigger: 50,
-    multiplier: 0.01,
+    multiplier: {team: TeamTypes.FRONT_END_DEVELOPERS, multiplier: 0.01},
   },
   {
     id: "jquery",
     name: "Learn jQuery",
     description: "Your buddy told you jQuery was all the rage, so you decided to get your development team using jQuery to make the page more impressive.",
-    team: TeamType.FRONT_END_DEVELOPERS,
+    team: TeamTypes.FRONT_END_DEVELOPERS,
     cost: 100,
     trigger: 50,
-    multiplier: 0.01,
+    multiplier: {team: TeamTypes.FRONT_END_DEVELOPERS, multiplier: 0.01},
   },
   {
     id: "brand1",
     name: "Create a brand image",
     description: "Many of your visitors are starting to be recurring, so maybe it's important to give the users something to remember. A brand image is powerful, and means a website overhaul.",
-    team: TeamType.GRAPHIC_DESIGN,
+    team: TeamTypes.GRAPHIC_DESIGN,
     cost: 100,
     trigger: 50,
-    multiplier: 0.03,
+    multiplier: {team: TeamTypes.GRAPHIC_DESIGN, multiplier: 0.03},
   },
   {
     id: "motto",
@@ -93,7 +93,7 @@ var skills = [
     description: `You've decided to go with "Don't be greedy"`,
     cost: 100,
     trigger: 50,
-    multiplier: 0.01,
+    multiplier: {team: TeamTypes.NONE, multiplier: 0.01},
   },
   {
     id: "php1",
@@ -101,7 +101,7 @@ var skills = [
     description: "",
     cost: 150,
     trigger: 50,
-    multiplier: 0.01,
+    multiplier: {team: TeamTypes.NONE, multiplier: 0.01},
   },
   {
     id: "nodejs1",
@@ -109,7 +109,7 @@ var skills = [
     description: "",
     cost: 100,
     trigger: 50,
-    multiplier: 0.01,
+    multiplier: {team: TeamTypes.NONE, multiplier: 0.01},
   },
   {
     id: "subscription",
@@ -117,7 +117,7 @@ var skills = [
     description: "In order to increase revenue, you need to start selling software using a subscription pricing model",
     cost: 3000,
     trigger: 3000,
-    multiplier: 0.05,
+    multiplier: {team: TeamTypes.NONE, multiplier: 0.05},
   },
   {
     id: "cto",
@@ -125,7 +125,7 @@ var skills = [
     description: "There are just too many technologies for you to keep track of! You need a CTO so you can focus on the business aspect of your startup.",
     cost: 5000,
     trigger: 3000,
-    multiplier: 0.05,
+    multiplier: {team: TeamTypes.NONE, multiplier: 0.05},
   },
   {
     id: "cfo",
@@ -133,7 +133,7 @@ var skills = [
     description: "You're making money (and spending it) faster that you can think. You need to hire a CFO to keep your finances under control.",
     cost: 5000,
     trigger: 3000,
-    multiplier: 0.3,
+    multiplier: {team: TeamTypes.NONE, multiplier: 0.3},
   },
   {
     id: "ipo",
@@ -141,7 +141,7 @@ var skills = [
     description: `Congratulations! You now have the opportunity to go public on the stock market. Your IPO is supposedly one of the biggest in ${(new Date()).getFullYear()}.`,
     cost: 5000,
     trigger: 3000,
-    multiplier: 0.2,
+    multiplier: {team: TeamTypes.NONE, multiplier: 0.2},
   },
   {
     id: "book",
@@ -149,7 +149,7 @@ var skills = [
     description: "You've created an empire, and people want to hear your story. You write a book to tell it, and promote Startup while you're at it.",
     cost: 8000,
     trigger: 5000,
-    multiplier: 0.1,
+    multiplier: {team: TeamTypes.NONE, multiplier: 0.1},
   },
 ];
 

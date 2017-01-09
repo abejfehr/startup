@@ -290,7 +290,6 @@ class StartupGame extends Component {
   }
 
   onSkillPurchased (skill) {
-    debugger;
     // Determine the cost
     var cost = skill.cost;
     var views = this.state.views;
@@ -304,10 +303,15 @@ class StartupGame extends Component {
     // Add the skill to the list of skills
     var skills = this.state.skills;
 
-    // Update the multiplier if this skill has one
+    // Update the team multiplier if the skill has one
+    var teams = this.state.teams;
     var multiplier = this.state.multiplier;
     if (skill.multiplier) {
-      multiplier += skill.multiplier;
+      if (skill.multiplier.team === TeamType.NONE) {
+        multiplier += skill.multiplier;
+      } else {
+        teams[skill.multiplier.team].multiplier += skill.multiplier.multiplier;
+      }
     }
 
     // Pay for the skill
@@ -317,7 +321,7 @@ class StartupGame extends Component {
     skills.push(skill.id);
 
     // Update the changes in the state
-    this.setState({ skills, views, multiplier });
+    this.setState({ skills, views, multiplier, teams });
   }
 
   onFire (team, id) {

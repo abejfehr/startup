@@ -14,7 +14,7 @@ class SkillItem extends Component {
         this.props.skill.name
       }</div>
       <p className="skill-description-tooltip">{this.props.skill.description}</p>
-      { this.props.skill.multiplier ? <p>Increases {this.props.skill.team ? '' : 'company'} efficiency {this.props.skill.team ?  `of the ${this.props.skill.team} Team` : ''} by {this.props.skill.multiplier * 100}%.</p> : <div /> }
+      { this.props.skill.multiplier ? <p>Increases {this.props.skill.team ? '' : 'company'} efficiency {this.props.skill.team ?  `of the ${this.props.skill.team} Team` : ''} by {this.props.skill.multiplier.multiplier * 100}%.</p> : <div /> }
       { this.props.basic ?
         <div /> :
         <div>Cost: {this.props.skill.cost} views</div>
