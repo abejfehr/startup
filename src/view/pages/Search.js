@@ -30,7 +30,6 @@ class Search extends Component {
     document.body.style.cursor = 'wait';
     e.target.style.cursor = 'wait';
 
-
     setTimeout(
       () => {
         this.setState({

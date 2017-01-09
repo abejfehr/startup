@@ -1,6 +1,5 @@
 .website.social {
 
-  background-color: #b3e0ea;
   background-image: none;
 
   .container {
@@ -9,12 +8,15 @@
     .social-page {
       position: relative;
       height: 100%;
+      background-color: #b3e0ea;
 
       .header {
         padding: 16px;
         background-color: #0c7cba;
         color: white;
         box-shadow: 0px 2px 10px rgba(120, 120, 120, 0.5);
+        display: flex;
+        justify-content: space-between;
 
         .headline {
           margin: 2px;
@@ -25,9 +27,71 @@
         .tagline {
           font-size: 11px;
         }
+
+        .logout-link {
+          text-decoration: none;
+          color: white;
+
+          .icon-exit {
+            font-size: 30px;
+            display: block;
+            text-align: center;
+          }
+        }
       }
 
-      .social-page-content-container {
+      .social-page-feed-container {
+        display: flex;
+        justify-content: space-around;
+
+        .avatar {
+          height: 160px;
+          width: 160px;
+          background-color: gray;
+          border: 3px solid black;
+        }
+
+        .username {
+          text-align: center;
+        }
+
+        h3 {
+          border-bottom: 1px solid gray;
+        }
+
+        .left-side {
+          padding: 10px;
+        }
+
+        .right-side {
+          padding: 10px;
+
+          .posts {
+            overflow-y: auto;
+            
+            .post {
+              border-radius: 7px;
+              display: flex;
+              margin: 6px;
+              background-color: white;
+              padding: 10px;
+
+              .name {
+                font-weight: bold;
+              }
+
+              .avatar {
+                width: 80px;
+                height: 80px;
+                border: 1px solid black;
+                margin-right: 10px;
+              }
+            }
+          }
+        }
+      }
+
+      .social-page-home-container {
         display: flex;
         justify-content: space-around;
 
