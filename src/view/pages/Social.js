@@ -98,7 +98,7 @@ class Social extends Component {
                   <h1 className="headline">StartUp</h1>
                   <p className="tagline">
                     { this.state.newsFeed ?
-                      `Now ${this.props.views} member${this.props.views !== 1 ? 's' : ''}, with ${this.props.viewsPerSecond.toFixed(1)} new member${this.props.viewsPerSecond !== 1 ? 's' : ''} each second` :
+                      `Now ${this.props.views} member${this.props.views !== 1 ? 's' : ''}, with ${this.props.viewsPerSecond.toFixed(2)} new member${this.props.viewsPerSecond !== 1 ? 's' : ''} each second` :
                       'A place for people...and cats.'
                     }
                   </p>
@@ -135,7 +135,7 @@ class Social extends Component {
                     <p>What are you waiting for? All your friends want to share their amazing baby pictures with you and write posts that are cryptic so you can ask them for more information.</p>
                     <br />
                     <p>
-                      Our social network has {this.props.views} member{this.props.views !== 1 ? 's' : ''}, and is growing by {this.props.viewsPerSecond.toFixed(1)} member{this.props.viewsPerSecond !== 1 ? 's' : ''} each second!
+                      Our social network has {this.props.views} member{this.props.views !== 1 ? 's' : ''}, and is growing by {this.props.viewsPerSecond.toFixed(2)} member{this.props.viewsPerSecond !== 1 ? 's' : ''} each second!
                     </p>
                     <span className="icon-globe"></span>
                   </div>

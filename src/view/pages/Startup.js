@@ -51,7 +51,7 @@ class Startup extends Component {
                 </p>
                 { this.props.viewsPerSecond > 0 ?
                   <p>
-                    You are earning {this.props.viewsPerSecond.toFixed(1)} view{this.props.viewsPerSecond !== 1 ? 's' : ''} per second.
+                    You are earning {this.props.viewsPerSecond.toFixed(2)} view{this.props.viewsPerSecond !== 1 ? 's' : ''} per second.
                   </p> :
                   <div />
                 }

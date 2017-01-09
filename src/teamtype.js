@@ -6,6 +6,7 @@ var TeamTypes = {
   BACK_END_DEVELOPERS: "Back End Developers",
   TOOLS_DEVELOPERS: "Tools Developers",
   RESEARCH_AND_DEVELOPMENT: "R&D",
+  NONE: "NONE",
 }
 
 export default TeamTypes;

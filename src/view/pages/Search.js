@@ -132,7 +132,7 @@ class Search extends Component {
               }
               <div className="footer">
                 <p>
-                  {this.props.views} search{this.props.views !== 1 ? 'es' : ''} made, with {this.props.viewsPerSecond.toFixed(1)} search{this.props.viewsPerSecond !== 1 ? 'es' : ''} per second.
+                  {this.props.views} search{this.props.views !== 1 ? 'es' : ''} made, with {this.props.viewsPerSecond.toFixed(2)} search{this.props.viewsPerSecond !== 1 ? 'es' : ''} per second.
                 </p>
                 <p>
                   Copyright &copy; {(new Date()).getFullYear()} { this.props.skills.find(el => el == "startup") ? 'Startup' : 'My Website' }. All Rights Reserved. <a href="javascript:void(0)" onClick={() => this.props.onReset()}>
