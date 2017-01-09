@@ -135,7 +135,7 @@ class Social extends Component {
                     <p>What are you waiting for? All your friends want to share their amazing baby pictures with you and write posts that are cryptic so you can ask them for more information.</p>
                     <br />
                     <p>
-                      Our social network has {this.props.views} member{this.props.views !== 1 ? 's' : ''}, and is growing by {this.props.viewsPerSecond.toFixed(1)} member{this.props.viewsPerSecond !== 1 ? 's' : ''} each second!
+                      Our social network has {this.props.views} member{this.props.views !== 1 ? 's' : ''}, and is growing by {this.props.viewsPerSecond.toFixed(2)} member{this.props.viewsPerSecond !== 1 ? 's' : ''} each second!
                     </p>
                     <span className="icon-globe"></span>
                   </div>
