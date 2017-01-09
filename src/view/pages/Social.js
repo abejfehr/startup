@@ -98,7 +98,7 @@ class Social extends Component {
                   <h1 className="headline">StartUp</h1>
                   <p className="tagline">
                     { this.state.newsFeed ?
-                      `Now ${this.props.views} member${this.props.views !== 1 ? 's' : ''}, with ${this.props.viewsPerSecond.toFixed(1)} new member${this.props.viewsPerSecond !== 1 ? 's' : ''} each second` :
+                      `Now ${this.props.views} member${this.props.views !== 1 ? 's' : ''}, with ${this.props.viewsPerSecond.toFixed(2)} new member${this.props.viewsPerSecond !== 1 ? 's' : ''} each second` :
                       'A place for people...and cats.'
                     }
                   </p>
