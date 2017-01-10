@@ -1,5 +1,7 @@
 import { h, Component } from 'preact';
 
+import Ad from '../components/Ad';
+
 class Social extends Component {
 
   constructor (props) {
@@ -9,7 +11,7 @@ class Social extends Component {
       username: '',
       password: '',
       newsFeed: false,
-    }
+    };
   }
 
   handleLogin (e) {
@@ -152,13 +154,7 @@ class Social extends Component {
               }
               <div className="footer">
                 { this.props.skills.find(el => el == 'monetize') ?
-                  <div style={{
-                    display: 'inline-block',
-                    width: '728px',
-                    height: '90px',
-                    border: '1px solid black',
-                    backgroundColor: '#aaa'
-                  }} /> :
+                  <Ad /> :
                   <div />
                 }
                 <p>

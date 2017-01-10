@@ -1,5 +1,7 @@
 import { h, render, Component } from 'preact';
 
+import Ad from '../components/Ad';
+
 class Search extends Component {
 
   constructor (props) {
@@ -140,13 +142,7 @@ class Search extends Component {
                   </a>
                 </p>
                 { this.props.skills.find(el => el == 'monetize') ?
-                  <div style={{
-                    display: 'inline-block',
-                    width: '728px',
-                    height: '90px',
-                    border: '1px solid black',
-                    backgroundColor: '#aaa'
-                  }} /> :
+                  <Ad /> :
                   <div />}
               </div>
               <div />

@@ -47,7 +47,7 @@ class Master extends Component {
               <p>What would you like to do?</p>
               <div>
                 <a href="javascript:void(0)" onClick={() => this.setState({ showAcquired: false }) && this.props.onSkillPurchased({ id: 'acquired', cost: 0 })}>Sell the company</a>
-                <a href="javascript:void(0)" onClick={() => this.setState({ showAcquired: false }) && this.props.onSkillPurchased({ id: 'notacquired', cost: 0})}>Keep the company</a>
+                <a href="javascript:void(0)" onClick={() => this.setState({ showAcquired: false }) && this.props.onSkillPurchased({ id: 'notacquired', cost: 0 })}>Keep the company</a>
               </div>
             </Modal>
             <Modal visible={this.state.showAcquire}>

@@ -1,6 +1,7 @@
 import { h, render, Component } from 'preact';
 
 import Modal from '../components/Modal';
+import Ad from '../components/Ad';
 
 class Startup extends Component {
 
@@ -71,13 +72,7 @@ class Startup extends Component {
                   </a>
                 </p>
                 { this.props.skills.find(el => el == 'monetize') ?
-                  <div style={{
-                    display: 'inline-block',
-                    width: '728px',
-                    height: '90px',
-                    border: '1px solid black',
-                    backgroundColor: '#aaa'
-                  }} /> :
+                  <Ad /> :
                   <div />}
               </div> :
               <div />
