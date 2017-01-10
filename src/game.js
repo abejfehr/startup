@@ -328,7 +328,7 @@ class StartupGame extends Component {
   }
 
   onFire (team, id) {
-    var workers = this.state.team[team];
+    var workers = this.state.teams[team].workers;
 
     this.removeWorkerFromTeam(team, workers.find(el => el.id === id));
   }
