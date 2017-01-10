@@ -16,7 +16,9 @@ class WorkersTable extends Component {
         return  <TeamTable
                   workers={this.props.teams[team].workers}
                   team={team}
-                  cost={this.props.teams[team].getCost()} />;
+                  cost={this.props.teams[team].getCost()}
+                  onHire={this.props.onHire}
+                  onFire={this.props.onFire} />;
       }.bind(this));
     }
 

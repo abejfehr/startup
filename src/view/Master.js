@@ -20,11 +20,21 @@ class Master extends Component {
     }
   }
 
+  beAcquired () {
+    this.setState({ showAcquired: false });
+    this.props.onSkillPurchased({ id: 'acquired', cost: 0 });
+  }
+
+  dontBeAcquired () {
+    this.setState({ showAcquired: false });
+    this.props.onSkillPurchased({ id: '!acquired', cost: 0 });
+  }
+
   componentWillUpdate () {
     if (!this.props.skills.find(el => el == 'acquired' || el == '!acquired') && this.props.totalViews > 800) {
       this.setState({ showAcquired: true, acquiredShown: true });
     }
-    if (this.props.totalViews > 1000 && !this.props.skills.find(el => el == 'acquired')) {
+    if (this.props.totalViews > 1800 && !this.props.skills.find(el => el == 'acquired')) {
       this.setState({ showAcquire: true, acquireShown: true });
     }
   }
@@ -46,8 +56,8 @@ class Master extends Component {
               <p>{`You've done it, you've lived the new American dream. Your website is somehow so popular and innovative that search giant Boogle thought it would make an excellent addition to their portfolio of crazy projects.`}</p>
               <p>What would you like to do?</p>
               <div>
-                <a href="javascript:void(0)" onClick={() => this.setState({ showAcquired: false }) && this.props.onSkillPurchased({ id: 'acquired', cost: 0 })}>Sell the company</a>
-                <a href="javascript:void(0)" onClick={() => this.setState({ showAcquired: false }) && this.props.onSkillPurchased({ id: '!acquired', cost: 0 })}>Keep the company</a>
+                <a href="javascript:void(0)" onClick={this.beAcquired.bind(this)}>Sell the company</a>
+                <a href="javascript:void(0)" onClick={this.dontBeAcquired.bind(this)}>Keep the company</a>
               </div>
             </Modal>
             <Modal visible={this.state.showAcquire}>
