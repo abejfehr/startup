@@ -1,6 +1,6 @@
 import { h, Component } from 'preact';
 
-import TeamTypes from '../../teamtype';
+import TeamType from '../../teamtype';
 
 class WorkersTable extends Component {
 
@@ -9,10 +9,10 @@ class WorkersTable extends Component {
   }
 
   render () {
-    var workers = this.props.workers.map((worker) => {
+    var workers = this.props.teams[TeamType.GRAPHIC_DESIGN].workers.map((worker) => {
       return <tr key={worker.name}>
         <td>{worker.name}</td>
-        <td><a className="fire-worker" href="javascript:void(0)" onClick={() => this.props.onFire(TeamTypes.GRAPHIC_DESIGN, worker.id)}>
+        <td><a className="fire-worker" href="javascript:void(0)" onClick={() => this.props.onFire(TeamType.GRAPHIC_DESIGN, worker.id)}>
         { this.props.icon ?
           <span className="icon-exit"></span> :
           'fire'
@@ -33,9 +33,9 @@ class WorkersTable extends Component {
                           <div className="hire-worker">
                             <a
                               href="javascript:void(0)"
-                              onClick={() => this.props.onHire(TeamTypes.GRAPHIC_DESIGN)}>
+                              onClick={() => this.props.onHire(TeamType.GRAPHIC_DESIGN)}>
                               [Hire Employee]
-                            </a> ({this.props.teams[TeamTypes.GRAPHIC_DESIGN].getCost()} views)
+                            </a> ({this.props.teams[TeamType.GRAPHIC_DESIGN].getCost()} views)
                           </div>
                         </th>
                       </tr>

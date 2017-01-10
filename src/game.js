@@ -20,8 +20,6 @@ class StartupGame extends Component {
   constructor () {
     super();
 
-    var teams = {};
-
     /**
      * The timestamp since the last animation frame step. This is only used
      * by the step function
@@ -65,12 +63,7 @@ class StartupGame extends Component {
       /**
        * The teams
        */
-      teams,
-
-      /**
-       * A list of all of the workers that your company has
-       */
-      workers: [],
+      teams: [],
 
       /**
        * A list of all of the skills that your company has
@@ -100,17 +93,14 @@ class StartupGame extends Component {
       this.initTeams();
 
       // Go through the loaded data and get all the workers
-      var workers = [];
       for (let worker of loadedData.workers) {
         var newWorker = new Worker(worker.name, 0);
         this.addWorkerToTeam(worker.team, newWorker);
-        workers.push(newWorker);
       }
 
       this.setState({
         views: loadedData.views + 1,
         totalViews: loadedData.totalViews + 1,
-        workers,
         skills: loadedData.skills,
         multiplier: loadedData.multiplier,
       });
@@ -123,7 +113,6 @@ class StartupGame extends Component {
       this.setState({
         views: 1,
         totalViews: 1, // Should match the views in the beginning
-        workers: [],
         skills: [],
         multiplier: 1,
         viewsPerSecond: 0,
@@ -173,7 +162,7 @@ class StartupGame extends Component {
   initTeams () {
     var teams = this.state.teams;
     teams[TeamType.GRAPHIC_DESIGN] = new Team({
-      name: TeamType.GRAPHIC_DESIGN,
+      n: TeamType.GRAPHIC_DESIGN,
       desc: "They draw.",
       rate: x => x * 10,
       workers: [],
@@ -226,6 +215,7 @@ class StartupGame extends Component {
         });
       }
     }
+
     this.saveManager.save({
       views,
       queuedViews: this.queuedViews,
@@ -261,11 +251,9 @@ class StartupGame extends Component {
 
     // Add the worker to the team and the workers array
     this.addWorkerToTeam(team, newWorker);
-    var workers = this.state.workers;
-    workers.push(newWorker);
 
     // Update the changes in the state
-    this.setState({ workers, views });
+    this.setState({ views });
   }
 
   onReset () {
@@ -276,7 +264,6 @@ class StartupGame extends Component {
       views: 0,
       totalViews: 0, // Should match the views in the beginning
       teams: [],
-      workers: [],
       skills: [],
       multiplier: 1,
     }, () => {
@@ -324,17 +311,9 @@ class StartupGame extends Component {
   }
 
   onFire (team, id) {
-    var workers = this.state.workers;
+    var workers = this.state.team[team];
 
     this.removeWorkerFromTeam(team, workers.find(el => el.id === id));
-
-    workers.splice(
-      workers.indexOf(
-        workers.find(el => el.id === id)
-      ), 1
-    );
-
-    this.setState({ workers });
   }
 
   onChoice (choice) {
