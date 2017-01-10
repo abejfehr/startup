@@ -138,14 +138,12 @@ class StartupGame extends Component {
     window.onkeydown = function (e) {
       if (e.keyCode == 32 && !this.cheating && location.href.indexOf('localhost')) {
         this.cheating = true;
-        console.log("KeyDown. Cheating? ", this.cheating);
       }
     }.bind(this);
 
     window.onkeyup = function (e) {
       if (e.keyCode == 32 && this.cheating && location.href.indexOf('localhost')) {
         this.cheating = false;
-        console.log("KeyUp. Cheating? ", this.cheating);
       }
     }.bind(this);
 
@@ -208,7 +206,6 @@ class StartupGame extends Component {
     this.lastTimestamp = timestamp;
     this.ticks += progress;
 
-    console.log("Step. Cheating? ", this.cheating);
     this.queuedViews += this.getWorkerViews(progress) * this.state.multiplier * (this.cheating ? 100 : 1);
 
     // Calculate the total number of views per second
