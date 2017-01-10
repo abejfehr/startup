@@ -10,7 +10,7 @@ var skills = [
   },
   {
     id: "html2",
-    name: "Loan a used copy of HTML for Dummies",
+    name: "Borrow a used copy of HTML for Dummies",
     description: "If you're gonna start adding content to your website, you'd better know how to mark it up. This book is an excellent resource and teaches you the state-of-the-art HTML 4.0.",
     cost: 0,
     trigger: 5,
