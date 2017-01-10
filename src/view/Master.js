@@ -21,7 +21,7 @@ class Master extends Component {
   }
 
   componentWillUpdate () {
-    if (!this.props.skills.find(el => el == 'acquired' || el == 'notacquired') && this.props.totalViews > 800) {
+    if (!this.props.skills.find(el => el == 'acquired' || el == '!acquired') && this.props.totalViews > 800) {
       this.setState({ showAcquired: true, acquiredShown: true });
     }
     if (this.props.totalViews > 1000 && !this.props.skills.find(el => el == 'acquired')) {
@@ -47,7 +47,7 @@ class Master extends Component {
               <p>What would you like to do?</p>
               <div>
                 <a href="javascript:void(0)" onClick={() => this.setState({ showAcquired: false }) && this.props.onSkillPurchased({ id: 'acquired', cost: 0 })}>Sell the company</a>
-                <a href="javascript:void(0)" onClick={() => this.setState({ showAcquired: false }) && this.props.onSkillPurchased({ id: 'notacquired', cost: 0 })}>Keep the company</a>
+                <a href="javascript:void(0)" onClick={() => this.setState({ showAcquired: false }) && this.props.onSkillPurchased({ id: '!acquired', cost: 0 })}>Keep the company</a>
               </div>
             </Modal>
             <Modal visible={this.state.showAcquire}>
