@@ -7,7 +7,10 @@ class Ad extends Component {
   }
 
   render () {
-    return  <iframe src="ad.html" style="border: none; width: 728px; height: 90px;"></iframe>;
+    return  <div className="ad">
+              <div>Advertisement</div>
+              <iframe src="ad.html"></iframe>
+            </div>;
   }
 }
 
