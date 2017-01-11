@@ -181,7 +181,7 @@ class StartupGame extends Component {
     teams[TeamType.GRAPHIC_DESIGN] = new Team({
       n: TeamType.GRAPHIC_DESIGN,
       desc: "They draw.",
-      rate: x => x * 10,
+      rate: 0.2,
       workers: [],
       cost: n => n * n + 5,
     });

@@ -31,10 +31,10 @@ class Master extends Component {
   }
 
   componentWillUpdate () {
-    if (!this.props.skills.find(el => el == 'acquired' || el == '!acquired') && this.props.totalViews > 800) {
+    if (!this.props.skills.find(el => el == 'acquired' || el == '!acquired') && this.props.totalViews > 100000) {
       this.setState({ showAcquired: true, acquiredShown: true });
     }
-    if (this.props.totalViews > 1800 && !this.props.skills.find(el => el == 'acquired')) {
+    if (this.props.totalViews > 8500000000000000 && !this.props.skills.find(el => el == 'acquired')) {
       this.setState({ showAcquire: true, acquireShown: true });
     }
   }
