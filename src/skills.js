@@ -26,7 +26,7 @@ var skills = [
   },
   {
     id: "favicon",
-    name: "What's a favicon?",
+    name: "Add a favicon",
     description: "A buddy was adding your website to favourites when he realized your page didn't have an actual icon. He tells you what a favicon is and how to set it up, but you just keep it simple for now.",
     cost: 5,
     trigger: 6,
