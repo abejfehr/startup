@@ -38,19 +38,8 @@ class Basic extends Component {
               <div className="footer">
                 <hr />
                 <p>
-                  Copyright &copy; {(new Date()).getFullYear()} { this.props.skills.find(el => el == "startup") ? 'Startup' : 'My Website' }. All Rights Reserved. <a href="javascript:void(0)" onClick={() => this.props.onReset()}>
-                    Reset
-                  </a>
+                  Copyright &copy; {(new Date()).getFullYear()} { this.props.skills.find(el => el == "startup") ? 'Startup' : 'My Website' }. All Rights Reserved.
                 </p>
-                { this.props.skills.find(el => el == 'monetize') ?
-                  <div style={{
-                    display: 'inline-block',
-                    width: '728px',
-                    height: '90px',
-                    border: '1px solid black',
-                    backgroundColor: '#aaa'
-                  }} /> :
-                  <div />}
               </div> :
               <div />
             }
