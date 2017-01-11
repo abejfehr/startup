@@ -66,6 +66,9 @@ class Basic extends Component {
                 <p>
                   Copyright &copy; {(new Date()).getFullYear()} { this.props.skills.find(el => el == "startup") ? 'Startup' : 'My Website' }. All Rights Reserved.
                 </p>
+                <a href="javascript:void(0)" onClick={() => this.props.onReset()}>
+                  Reset
+                </a>
               </div> :
               <div />
             }
