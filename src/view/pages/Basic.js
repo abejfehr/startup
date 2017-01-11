@@ -4,6 +4,22 @@ class Basic extends Component {
 
   constructor (props) {
     super(props);
+
+    this.state = {
+      aboutShown: false,
+    }
+  }
+
+  goBack () {
+    this.setState({
+      aboutShown: false,
+    });
+  }
+
+  showAbout () {
+    this.setState({
+      aboutShown: true,
+    });
   }
 
   render () {
@@ -16,23 +32,33 @@ class Basic extends Component {
               </div> :
               <div />
             }
-            { this.props.totalViews > 0 ?
+            { !this.state.aboutShown ?
               <div>
-                <p>
-                  This page has been viewed {this.props.views} time{this.props.views !== 1 ? 's' : ''}.
-                </p>
-                { this.props.viewsPerSecond > 0 ?
-                  <p>
-                    You are earning {this.props.viewsPerSecond.toFixed(2)} view{this.props.viewsPerSecond !== 1 ? 's' : ''} per second.
-                  </p> :
+                { this.props.totalViews > 0 ?
+                  <div>
+                    <p>
+                      This page has been viewed {this.props.views} time{this.props.views !== 1 ? 's' : ''}.
+                    </p>
+                    { this.props.viewsPerSecond > 0 ?
+                      <p>
+                        You are earning {this.props.viewsPerSecond.toFixed(2)} view{this.props.viewsPerSecond !== 1 ? 's' : ''} per second.
+                      </p> :
+                      <div />
+                    }
+                  </div> :
+                  <div />
+                }
+                { this.props.skills.find(el => el == 'html2') && ! this.props.skills.find(el => el == 'about') ?
+                  <img src="assets/pikachu.gif" /> :
+                  <div />
+                }
+                {
+                  this.props.skills.find(el => el == 'about') ?
+                  <a href="javascript:void(0)" onClick={this.showAbout}>About</a> :
                   <div />
                 }
               </div> :
-              <div />
-            }
-            { this.props.skills.find(el => el == 'html2') && ! this.props.skills.find(el => el == 'startup') ?
-              <img src="assets/pikachu.gif" /> :
-              <div />
+              <About onGoBack={this.goBack} />
             }
             { this.props.skills.find(el => el == 'html2') ?
               <div className="footer">
