@@ -68,7 +68,7 @@ class StartupGame extends Component {
       /**
        * The teams
        */
-      teams: [],
+      teams: {},
 
       /**
        * A list of all of the skills that your company has

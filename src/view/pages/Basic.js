@@ -1,7 +1,5 @@
 import { h, Component } from 'preact';
 
-import About from '../components/About';
-
 class Basic extends Component {
 
   constructor (props) {
@@ -13,6 +11,8 @@ class Basic extends Component {
   }
 
   goBack (e) {
+    if (!this.state.aboutShown) { return; }
+
     var oldCursor = e.target.style.cursor;
 
     // Don't do this twice
@@ -34,6 +34,8 @@ class Basic extends Component {
   }
 
   showAbout (e) {
+    if (this.state.aboutShown) { return; }
+
     var oldCursor = e.target.style.cursor;
 
     // Don't do this twice
@@ -55,46 +57,50 @@ class Basic extends Component {
   }
 
   render () {
-    if (this.state.aboutShown) {
-      return <About title={ this.props.skills.find(el => el == "startup") ? 'Startup' : 'My Website' } onGoBack={this.goBack.bind(this)} />;
-    }
     return  <div>
             { this.props.skills.find(el => el == 'html2') ?
               <div className="header">
-                <h1 className="headline">{ this.props.skills.find(el => el == "startup") ? 'Startup' : 'My Website' }</h1>
-                <p className="tagline">{ this.props.skills.find(el => el == "startup") ? 'A serious business.' : 'My personal page' }</p>
+                <h1 className="headline">{this.state.aboutShown ? 'About Startup' : 'My Website'}</h1>
+                { this.props.skills.find(el => el == 'about') ?
+                  <div>
+                    <a href="javascript:void(0)" onClick={this.goBack.bind(this)}>Home</a> <a href="javascript:void(0)" onClick={this.showAbout.bind(this)}>About</a>
+                  </div> :
+                  <div />
+                }
                 <hr />
               </div> :
               <div />
             }
-            { this.props.totalViews > 0 ?
+            { this.state.aboutShown ?
               <div>
-                <p>
-                  This page has been viewed {this.props.views} time{this.props.views !== 1 ? 's' : ''}.
-                </p>
-                { this.props.viewsPerSecond > 0 ?
-                  <p>
-                    You are earning {this.props.viewsPerSecond.toFixed(2)} view{this.props.viewsPerSecond !== 1 ? 's' : ''} per second.
-                  </p> :
-                  <div />
-                }
+                <p>startup is a fun game made by <a href="https://www.abefehr.com/">Abe Fehr</a> and <a href="javascript:void(0)" onClick={() => alert("He's shy and doesn't give out his info. Sorry!")}>Scott Andrechek</a></p>
               </div> :
-              <div />
-            }
-            { this.props.skills.find(el => el == 'html2') && ! this.props.skills.find(el => el == 'about') ?
-              <img src="assets/pikachu.gif" /> :
-              <div />
-            }
-            {
-              this.props.skills.find(el => el == 'about') ?
-              <a href="javascript:void(0)" onClick={this.showAbout.bind(this)}>About</a> :
-              <div />
+              <div>
+              { this.props.totalViews > 0 ?
+                <div>
+                  <p>
+                    This page has been viewed {this.props.views} time{this.props.views !== 1 ? 's' : ''}.
+                  </p>
+                  { this.props.viewsPerSecond > 0 ?
+                    <p>
+                      You are earning {this.props.viewsPerSecond.toFixed(2)} view{this.props.viewsPerSecond !== 1 ? 's' : ''} per second.
+                    </p> :
+                    <div />
+                  }
+                </div> :
+                <div />
+              }
+              { this.props.skills.find(el => el == 'html2') && ! this.props.skills.find(el => el == 'about') ?
+                <img src="assets/pikachu.gif" /> :
+                <div />
+              }
+              </div>
             }
             { this.props.skills.find(el => el == 'html2') ?
               <div className="footer">
                 <hr />
                 <p>
-                  Copyright &copy; {(new Date()).getFullYear()} { this.props.skills.find(el => el == "startup") ? 'Startup' : 'My Website' }. All Rights Reserved.
+                  Copyright &copy; {(new Date()).getFullYear()} My Website. All Rights Reserved.
                 </p>
                 <a href="javascript:void(0)" onClick={() => this.props.onReset()}>
                   Reset

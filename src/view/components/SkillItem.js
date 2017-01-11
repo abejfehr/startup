@@ -6,11 +6,16 @@ class SkillItem extends Component {
     super(props);
   }
 
+  purchaseSkill (e) {
+    this.props.onSkillPurchased(this.props.skill);
+    e.stopPropagation();
+  }
+
   render () {
-    return <div className="skill-bar-item" onClick={() => this.props.clickable && this.props.onSkillPurchased(this.props.skill)}>
+    return <div className="skill-bar-item" onClick={(e) => this.props.clickable && this.purchaseSkill(e)}>
       <div className="skill-title">
       { this.props.basic ?
-        <a className="skill-purchase" href="javascript:void(0)" onClick={() => this.props.onSkillPurchased(this.props.skill)}>{this.props.skill.name}</a>:
+        <a className="skill-purchase" href="javascript:void(0)" onClick={this.purchaseSkill.bind(this)}>{this.props.skill.name}</a>:
         this.props.skill.name
       }</div>
       <p className="skill-description-tooltip">{this.props.skill.description}</p>
@@ -21,7 +26,7 @@ class SkillItem extends Component {
       }
       { this.props.basic ?
         <div />:
-        <a className="skill-purchase" href="javascript:void(0)" onClick={() => this.props.onSkillPurchased(this.props.skill)}>Train skill</a>
+        <a className="skill-purchase" href="javascript:void(0)" onClick={this.purchaseSkill.bind(this)}>Train skill</a>
       }
     </div>;
   }

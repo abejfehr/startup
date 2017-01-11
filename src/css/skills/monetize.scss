@@ -1,7 +1,12 @@
 .website.monetize {
   .ad {
-    text-align: left;
-    color: darkgray;
+    margin: 0 auto;
+    width: 730px;
+
+    div {
+      text-align: left;
+      color: darkgray;
+    }
 
     iframe {
       border: 1px dashed black;
