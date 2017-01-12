@@ -51,7 +51,7 @@ var skills = [
   {
     id: "paint",
     name: "Paint the office",
-    description: "The concrete and white dry wall are starting to hurt moral. Maybe a nice pastel would spruce up the place.",
+    description: "The concrete and white dry walls are starting to hurt morale. Maybe a nice pastel green would spruce up the place.",
     cost: 20,
     trigger: 30,
     multiplier: {team: TeamTypes.NONE, multiplier: 0.05},
@@ -146,15 +146,6 @@ var skills = [
     cost: 2000,
     trigger: 4000,
     multiplier: {team: TeamTypes.BACK_END_DEVELOPERS, multiplier: 0.05},
-  },
-  {
-    id: "coffee",
-    name: "Buy a coffee machine",
-    description: "Your employees are getting thirsty, and now that you have interns that could fetch coffee, we need a coffee machine for them to fetch it from.",
-    team: TeamTypes.INTERNS,
-    cost: 2500,
-    trigger: 5000,
-    multiplier: {team: TeamTypes.NONE, multiplier: 0.10},
   },
   {
     id: "nodejs1",
