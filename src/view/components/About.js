@@ -15,7 +15,7 @@ class About extends Component {
                   <img src="assets/abe.jpg" />
                 </div>
                 <div className="bio">
-                  <h2><a href="javascript:void(0)" onClick={() => alert("Scott is shy, so you can't contact him. Sorry!")}>Scott Andrechek</a></h2>
+                  <h2><a href="https://github.com/BranchofLight/" target="_blank">Scott Andrechek</a></h2>
                   <img src="assets/scott.jpg" />
                 </div>
               </div>
