@@ -181,9 +181,63 @@ class StartupGame extends Component {
     teams[TeamType.GRAPHIC_DESIGN] = new Team({
       n: TeamType.GRAPHIC_DESIGN,
       desc: "They draw.",
-      rate: 0.2,
+      rate: 0.3,
       workers: [],
-      cost: n => n * n + 5,
+      cost: n => ~~Math.pow(n, (n + 1) * 0.7) + 5,
+    });
+
+    teams[TeamType.FRONT_END_DEVELOPERS] = new Team({
+      n: TeamType.FRONT_END_DEVELOPERS,
+      desc: "They develop.",
+      rate: 1,
+      workers: [],
+      cost: n => ~~Math.pow(n, (n + 1)) + 100,
+      trigger: 200,
+    });
+
+    teams[TeamType.MARKETING] = new Team({
+      n: TeamType.MARKETING,
+      desc: "They market.",
+      rate: 4,
+      workers: [],
+      cost: n => ~~Math.pow(n, (n + 1) * 0.8) + 8000,
+      trigger: 8000,
+    });
+
+    teams[TeamType.INTERNS] = new Team({
+      n: TeamType.INTERNS,
+      desc: "They're cheap.",
+      rate: 6,
+      workers: [],
+      cost: n => ~~Math.pow(n, (n + 1) * 0.8) + 50000,
+      trigger: 100000,
+    });
+
+    teams[TeamType.BACK_END_DEVELOPERS] = new Team({
+      n: TeamType.BACK_END_DEVELOPERS,
+      desc: "They write back end code.",
+      rate: 8,
+      workers: [],
+      cost: n => ~~Math.pow(n, (n + 1) * 0.8) + 20000000,
+      trigger: 20000000,
+    });
+
+    teams[TeamType.TOOLS_DEVELOPERS] = new Team({
+      n: TeamType.TOOLS_DEVELOPERS,
+      desc: "They develop tools.",
+      rate: 10,
+      workers: [],
+      cost: n => ~~Math.pow(n, (n + 1) * 0.8) + 80000000,
+      trigger: 80000000,
+    });
+
+    teams[TeamType.RESEARCH_AND_DEVELOPMENT] = new Team({
+      n: TeamType.RESEARCH_AND_DEVELOPMENT,
+      desc: "They research.",
+      rate: 12,
+      workers: [],
+      cost: n => ~~Math.pow(n, (n + 1) * 0.8) + 1000000000,
+      trigger: 1000000000,
     });
 
     this.setState({ teams });
@@ -311,7 +365,7 @@ class StartupGame extends Component {
     var multiplier = this.state.multiplier;
     if (skill.multiplier) {
       if (skill.multiplier.team === TeamType.NONE) {
-        multiplier += skill.multiplier;
+        multiplier += skill.multiplier.multiplier;
       } else {
         teams[skill.multiplier.team].multiplier += skill.multiplier.multiplier;
       }

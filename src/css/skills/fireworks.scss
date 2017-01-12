@@ -1,0 +1,30 @@
+.website.fireworks {
+
+  .header {
+    .headline {
+      margin: 0 auto;
+      background-image: url(../../assets/fwlogo.png);
+      color: transparent;
+      width: 527px;
+      height: 161px;
+    }
+
+    .menu {
+      a:nth-child(1) {
+        background-image: url(../../assets/homebutton.png);
+        color: transparent;
+        display: inline-block;
+        width: 69px;
+        height: 46px;
+      }
+      a:nth-child(2) {
+        background-image: url(../../assets/aboutbutton.png);
+        color: transparent;
+        display: inline-block;
+        width: 69px;
+        height: 46px;
+      }
+    }
+  }
+
+}

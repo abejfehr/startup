@@ -12,7 +12,15 @@ class WorkersTable extends Component {
 
   render () {
     if (this.props.teams) {
-      var teams = Object.keys(this.props.teams).map(function (team) {
+      var teams = Object.keys(this.props.teams).reduce(function (acc, cur, i) {
+        if (!this.props.teams[cur].trigger) {
+          return acc.concat(cur);
+        }
+        if (this.props.totalViews > this.props.teams[cur].trigger) {
+          return acc.concat(cur);
+        }
+        return acc;
+      }.bind(this), []).map(function (team) {
         return  <TeamTable
                   workers={this.props.teams[team].workers}
                   team={team}

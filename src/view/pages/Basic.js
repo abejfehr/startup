@@ -1,6 +1,9 @@
-import { h, Component } from 'preact';
+import { h } from 'preact';
 
-class Basic extends Component {
+import About from '../components/About';
+import WebPage from '../components/WebPage';
+
+class Basic extends WebPage {
 
   constructor (props) {
     super(props);
@@ -13,47 +16,13 @@ class Basic extends Component {
   goBack (e) {
     if (!this.state.aboutShown) { return; }
 
-    var oldCursor = e.target.style.cursor;
-
-    // Don't do this twice
-    if (oldCursor == 'wait') { return; }
-
-    document.body.style.cursor = 'wait';
-    e.target.style.cursor = 'wait';
-
-
-    setTimeout(
-      () => {
-        this.setState({
-          aboutShown: false,
-        });
-        document.body.style.cursor = 'default';
-        e.target.style.cursor = oldCursor;
-      }, 500
-    )
+    this.changePage(e, { aboutShown: false }, 500);
   }
 
   showAbout (e) {
     if (this.state.aboutShown) { return; }
 
-    var oldCursor = e.target.style.cursor;
-
-    // Don't do this twice
-    if (oldCursor == 'wait') { return; }
-
-    // Start "loading"
-    document.body.style.cursor = 'wait';
-    e.target.style.cursor = 'wait';
-
-    setTimeout(
-      () => {
-        this.setState({
-          aboutShown: true,
-        });
-        document.body.style.cursor = 'default';
-        e.target.style.cursor = oldCursor;
-      }, 500
-    )
+    this.changePage(e, { aboutShown: true }, 500);
   }
 
   render () {
@@ -72,9 +41,7 @@ class Basic extends Component {
               <div />
             }
             { this.state.aboutShown ?
-              <div>
-                <p>startup is a fun game made by <a href="https://www.abefehr.com/">Abe Fehr</a> and <a href="javascript:void(0)" onClick={() => alert("He's shy and doesn't give out his info. Sorry!")}>Scott Andrechek</a></p>
-              </div> :
+              <About /> :
               <div>
               { this.props.totalViews > 0 ?
                 <div>

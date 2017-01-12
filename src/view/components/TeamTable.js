@@ -24,13 +24,16 @@ class TeamTable extends Component {
                 <thead>
                   <tr>
                     <th colSpan="2">
-                      Graphic Designers<br />
+                      {this.props.team}
+                      <br />
                       <div className="hire-worker">
                         <a
                           href="javascript:void(0)"
                           onClick={() => this.props.onHire(this.props.team)}>
                           [Hire Employee]
-                        </a> ({this.props.cost} views)
+                        </a>
+                        <br />
+                        (Cost: {this.props.cost} views)
                       </div>
                     </th>
                   </tr>

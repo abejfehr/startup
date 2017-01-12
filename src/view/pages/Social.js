@@ -1,8 +1,9 @@
 import { h, Component } from 'preact';
 
+import WebPage from '../components/WebPage';
 import Ad from '../components/Ad';
 
-class Social extends Component {
+class Social extends WebPage {
 
   constructor (props) {
     super(props);
@@ -20,46 +21,11 @@ class Social extends Component {
       return;
     }
 
-    var oldCursor = e.target.style.cursor;
-
-    // Don't do this twice
-    if (oldCursor == 'wait') { return; }
-
-    // Start "loading"
-    document.body.style.cursor = 'wait';
-    e.target.style.cursor = 'wait';
-
-    setTimeout(
-      () => {
-        this.setState({
-          newsFeed: true,
-        });
-        document.body.style.cursor = 'default';
-        e.target.style.cursor = oldCursor;
-      }, this.props.skills.find(el => el == 'php') ? 300 : 500
-    )
+    this.changePage(e, { newsFeed: true }, this.props.skills.find(el => el == 'php') ? 300 : 500);
   }
 
   handleLogout (e) {
-    var oldCursor = e.target.style.cursor;
-
-    // Don't do this twice
-    if (oldCursor == 'wait') { return; }
-
-    // Start "loading"
-    document.body.style.cursor = 'wait';
-    e.target.style.cursor = 'wait';
-
-    setTimeout(
-      () => {
-        this.setState({
-          newsFeed: false,
-          password: '',
-        });
-        document.body.style.cursor = 'default';
-        e.target.style.cursor = oldCursor;
-      }, this.props.skills.find(el => el == 'php') ? 300 : 500
-    )
+    this.changePage(e, { newsFeed: false, password: '' }, this.props.skills.find(el => el == 'php') ? 300 : 500);
   }
 
   render () {

@@ -1,8 +1,9 @@
 import { h, render, Component } from 'preact';
 
+import WebPage from '../components/WebPage';
 import Ad from '../components/Ad';
 
-class Search extends Component {
+class Search extends WebPage {
 
   constructor (props) {
     super(props);
@@ -22,47 +23,13 @@ class Search extends Component {
   handleSearch (e) {
     // If the query was empty, return right aways
     if (!this.state.query) { return; }
+    debugger;
 
-    var oldCursor = e.target.style.cursor;
-
-    // Don't do this twice
-    if (oldCursor == 'wait') { return; }
-
-    // Start "loading"
-    document.body.style.cursor = 'wait';
-    e.target.style.cursor = 'wait';
-
-    setTimeout(
-      () => {
-        this.setState({
-          showResults: !!this.state.query,
-        });
-        document.body.style.cursor = 'default';
-        e.target.style.cursor = oldCursor;
-      }, this.props.skills.find(el => el == 'php') ? 300 : 500
-    )
+    this.changePage(e, { showResults: !!this.state.query }, this.props.skills.find(el => el == 'php') ? 300 : 500);
   }
 
   handleGoBack (e) {
-    var oldCursor = e.target.style.cursor;
-
-    // Don't do this twice
-    if (oldCursor == 'wait') { return; }
-
-    document.body.style.cursor = 'wait';
-    e.target.style.cursor = 'wait';
-
-
-    setTimeout(
-      () => {
-        this.setState({
-          showResults: false,
-          query: '',
-        });
-        document.body.style.cursor = 'default';
-        e.target.style.cursor = oldCursor;
-      }, this.props.skills.find(el => el == 'php') ? 300 : 500
-    )
+    this.changePage(e, { showResults: false, query: '' }, this.props.skills.find(el => el == 'php') ? 300 : 500);
   }
 
   render () {

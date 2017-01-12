@@ -2,7 +2,9 @@
 
 This is a bible for the Startup Universe, it contains all of the lore and the rules for developing new story items.
 
-## The CEO
+## People
+
+### The CEO
 
 The player is the CEO of your startup, and this game follows their story.
 
@@ -10,17 +12,25 @@ The CEO once worked at IBN as a developer, and decided one day to get his web bu
 
 One day, the CEO quits his job at IBN, because he's looking for his purpose in life. Your old boss plays an integral role in the story of your startup, and he's a recurring character. Eventually, your old boss becomes an employee at your startup.
 
-## Other companies
+### The boss
+
+This is the CEO's old boss from IBN. He eventually becomes an employee at Startup.
+
+## Companies
 
 ### IBN
 
 > IBM
 
-This is a computer company in the startup Universe.
+URL: unknown
+
+This is a computer company in the startup Universe. The CEO worked at IBN for many years, before deciding to pursue creating a startup of his own.
 
 ### BlueTube
 
-> YouTube
+> YouTube, RedTube
+
+URL: unknown
 
 This is a video sharing website in the Startup Universe.
 
@@ -28,16 +38,22 @@ This is a video sharing website in the Startup Universe.
 
 > Google
 
+URL: unknown
+
 This is a search website in the Startup Universe.
 
 ### Bookface
 
 > Facebook
 
-This is a social network in the Startup Universe.
+URL: unknown
 
-## Lesser websites
+This is a social network in the Startup Universe.
 
 ### Blümberg
 
-###
+> Bloomberg
+
+URL: blümberg.com
+
+This is a news website in the Startup Universe.

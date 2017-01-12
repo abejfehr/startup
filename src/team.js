@@ -19,6 +19,7 @@ export default class Team {
    *   Calculates the rate that cost increases for the current level
    *   or the given level.
    * @param {Float} multiplier - The co-efficient of the rate function
+   * @param {Number} trigger - The number of totalViews before this is shown
    */
   constructor (team) {
     this.name = team.n;
@@ -27,10 +28,11 @@ export default class Team {
     this.workers = (team.workers) ? team.workers : [];
     this.cost = team.cost;
     this.multiplier = 1.0;
+    this.trigger = team.trigger;
   }
 
   getRate () {
-    return this.multiplier*this.rate*this.workers.length*60*30;
+    return this.multiplier*this.rate*this.workers.length * 60;
   }
 
   getCost () {

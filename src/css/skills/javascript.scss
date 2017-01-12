@@ -1,0 +1,115 @@
+.website.javascript {
+
+  .skill-bar {
+    -webkit-box-shadow: inset -2px 0px 10px 0px rgba(204,204,204,1);
+    -moz-box-shadow: inset -2px 0px 10px 0px rgba(204,204,204,1);
+    box-shadow: inset -2px 0px 10px 0px rgba(204,204,204,1);
+    padding-left: 3px;
+    padding-right: 3px;
+    background-color: #f8f8f8;
+    border-right: 1px solid gray;
+
+    .no-skills {
+      font-size: 14px;
+      text-align: center;
+      margin: 5px;
+      color: gray;
+    }
+
+    .skill-bar-title {
+      text-align: center;
+    }
+
+    .skill-bar-item {
+      position: relative;
+      border: 1px solid gray;
+      font-size: 12px;
+      margin: 6px;
+      padding: 5px;
+      border-radius: 5px;
+      box-sizing: border-box;
+
+      .skill-description-tooltip {
+          display: none;
+      }
+
+      .skill-title {
+        font-size: 14px;
+        font-weight: bold;
+        margin-bottom: 5px;
+      }
+
+      .skill-purchase {
+        display: none;
+      }
+
+      &:hover {
+        border: 2px solid gray;
+        padding: 4px;
+        cursor: pointer;
+
+        .skill-description-tooltip {
+            display: block;
+            position: fixed;
+            overflow: hidden;
+            width: 200px;
+            padding: 10px;
+            z-index: 99;
+            background-color: white;
+            border: 1px solid gray;
+        }
+      }
+    }
+  }
+
+  .worker-table {
+    -webkit-box-shadow: inset 2px 0px 10px 0px rgba(204,204,204,1);
+    -moz-box-shadow: inset 2px 0px 10px 0px rgba(204,204,204,1);
+    box-shadow: inset 2px 0px 10px 0px rgba(204,204,204,1);
+
+    padding: 5px;
+    background-color: #f8f8f8;
+    border-left: 1px solid gray;
+
+    h2 {
+      text-align: center;
+    }
+
+    .old-table-wrapper {
+      border: 1px solid gray;
+      border-radius: 5px;
+      margin: 4px;
+    }
+
+    .old-table {
+      border-collapse: collapse;
+      border: none;
+      width: 100%;
+
+      th {
+        border: none;
+        border-bottom: 1px solid gray;
+        padding: 5px;
+      }
+
+      tr:not(:last-child) {
+        border-bottom: 1px dashed gray;
+      }
+
+      td {
+        border: none;
+        padding: 3px;
+      }
+
+      .fire-worker {
+        text-decoration: none;
+        color: #ff6961;
+      }
+
+      .hire-worker {
+        font-size: 12px;
+      }
+    }
+  }
+
+}
